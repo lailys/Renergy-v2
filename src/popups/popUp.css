@@ -1,0 +1,9 @@
+.pop-row-box {
+  padding: 0;
+  margin: 0 0.5% 0 0;
+  /* border: solid 1px red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%;
+}

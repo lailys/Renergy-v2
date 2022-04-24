@@ -1,0 +1,26 @@
+:root {
+  --color_c: #013e92;
+  --color_c-clear: #013d92f9;
+  --color_d: #9bf051;
+  --color_d-clear: #9bf051d4;
+  --color_e: #f56acf;
+  --color_e-clear: #f56ad0f5;
+  --color_f: #454a5f;
+  --color_f-clear: #606577;
+  --color_g: #9bf051;
+  --color_g-clear: #9bf051f0;
+  --color_h: #51566c;
+  --color_h-clear: #51566cc1;
+}
+
+.admin-base-page-container {
+  /* border: #f56acf solid 1px; */
+  /* color: #fffffff9; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}

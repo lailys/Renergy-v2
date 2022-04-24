@@ -1,0 +1,23 @@
+.dashboard-page-container {
+  margin: 0;
+  padding: 0;
+  /* background: yellow; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100vw;
+  height: 100vh;
+}
+
+.popup-container {
+  background: #1c233351;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}

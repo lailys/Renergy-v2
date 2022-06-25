@@ -1,152 +1,59 @@
 :root {
-  --color_c: #013e92;
-  --color_c-clear: #013d92f9;
+  --color_c: #023883;
+  --color_c-clear: #023883de;
+  /* --color_a: #493c77;
+  --color_c: #493c77;
+  --color_c-clear: #493c77dd; */
   --color_d: #9bf051;
   --color_d-clear: #9bf051d4;
-  --color_e: #f56acf;
-  --color_e-clear: #f56ad0f5;
+  --color_e: #dd16f3;
+  --color_e-clear: #dd16f3e4;
   --color_f: #454a5f;
   --color_f-clear: #606577;
   --color_g: #9bf051;
-  --color_g-clear: #9bf051f0;
+  --color_g-clear: #bffe883e;
   --color_h: #51566c;
   --color_h-clear: #51566cc1;
-  --color_j: #1a76d2;
-  --color_j-clear: #1a76d2eb;
+  --color_j: #1eb0ff;
+  --color_j-clear: #1eb0ffec;
   --color_k: #c5c7d3;
   --color_k-clear: #c5c7d3ee;
 }
 
 .sign-page-container {
+  /* border: solid red 1px; */
+  background: url("../assets/backgroundLanding.jpg");
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
 }
-.auth-backdrop-a-container-blob-a {
-  /* z-index: 2; */
-  border: var(--color_d) solid 2px;
-  opacity: 0.5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.sign-page-container-shade {
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
   position: absolute;
-  top: 10vh;
-  left: 30vh;
-  border-radius: 25% 75% 51% 49% / 23% 39% 61% 77%;
-  width: 150vh;
-  height: 100vh;
-}
-.auth-backdrop-a-container-blob-b {
-  /* z-index: 2; */
-  background: var(--color_c-clear);
-  opacity: 0.95;
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 34% 66% 77% 23% / 35% 28% 72% 65%;
-  position: absolute;
-  left: 40vh;
-  top: 8vh;
-  width: 100vh;
-  height: 100vh;
-}
-.auth-backdrop-a-container-blob-c {
-  /* z-index: 1; */
-  border: var(--color_e) solid 4px;
-  opacity: 0.5;
-  margin-top: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 57% 43% 53% 47% / 75% 69% 31% 25%;
-  position: absolute;
-  top: -5vh;
-  width: 100vh;
-  height: 80vh;
-}
-.auth-backdrop-a-container-blob-d {
-  z-index: -1;
-  background: var(--color_f);
-  opacity: 0.8;
-  /* background: #fda80b; */
-  margin-top: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* position: absolute; */
-  border-radius: 57% 43% 53% 47% / 75% 69% 31% 25%;
-  position: absolute;
-  top: 30vh;
-  right: 0;
-  width: 30vh;
-  height: 30vh;
-}
-.auth-backdrop-a-container-blob-f {
-  background-color: var(--color_e-clear);
-  position: absolute;
-  bottom: 10vh;
-  right: 20vw;
-  border-radius: 51% 49% 49% 51% / 51% 50% 50% 49%;
-  font-size: 20vmin;
-  line-height: 1;
-  font-weight: bold;
-  letter-spacing: 2px;
-  font-family: "Poppins", sans-serif;
-  width: 1.5vw;
-  height: 1.5vw;
-}
-.blob-e {
-  z-index: -1;
-  /* background: #eae7ff; */
-  background: var(--color_f);
-  opacity: 0.4;
-  margin-top: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* position: absolute; */
-  border-radius: 57% 43% 53% 47% / 75% 69% 31% 25%;
-  position: absolute;
-  top: -20vh;
-  left: -4vh;
-  width: 30vh;
-  height: 30vh;
-}
-.blob-f {
-  z-index: -2;
-  /* background: #eae7ff; */
-  background: var(--color_f);
-  opacity: 0.4;
-  margin-top: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* position: absolute; */
-  border-radius: 57% 43% 53% 47% / 75% 69% 31% 25%;
-  position: absolute;
-  top: -36.1vh;
-  left: -15vh;
-  width: 30vh;
-  height: 30vh;
+  top: 0;
+  left: 0;
+  width: 60vw;
+  min-height: 100vh;
 }
 .sign-page-container-form {
-  /* border: solid red 1px; */
-  background: white;
+  /* border: #9bf051 solid 1px; */
   z-index: 3;
   position: absolute;
-  top: 18vh;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  border-radius: 10px;
-  width: 60vh;
-  height: 70vh;
+  top: 25vh;
+  left: 0px;
+  width: 50vw;
 }

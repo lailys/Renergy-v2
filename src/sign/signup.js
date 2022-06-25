@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { TbdContext } from "../provider/provider";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   TextField,
@@ -9,7 +9,6 @@ import {
   Checkbox,
   FormControlLabel,
   Typography,
-  Link,
   Grid,
   Box,
   Container,
@@ -23,23 +22,34 @@ function Signup() {
   if (!context) {
     console.log("Context dose not exists- dashboard component -");
   }
-  const navigate = useNavigate();
+
   const muiTheme = createTheme({});
   const fullInputStyles = makeStyles((theme) =>
     createStyles({
       root: {
         "& .MuiOutlinedInput-root": {
-          color: "var(--color_c)",
-          "& fieldset": {
-            color: "var(--color_c-clear)",
-            borderColor: "var(  --color_i-clear)", // default
+          color: "var(--color_j)",
+
+          "&:focus": {
+            borderColor: "yellow",
           },
+
+          "& fieldset": {
+            color: "red",
+          },
+
           "&:hover fieldset": {
             borderColor: "var(--color_j)",
           },
           "&:focus fieldset": {
             borderColor: "var(--color_j)",
           },
+        },
+        "& label": {
+          color: "var(--color_i-clear)",
+        },
+        "&:hover label": {
+          color: "var(--color_j)",
         },
       },
     })
@@ -51,7 +61,8 @@ function Signup() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            // border: "solid red 1px",
+            marginTop: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -70,49 +81,61 @@ function Signup() {
           </Typography>{" "}
           <Box
             component="form"
-            noValidate
-            onSubmit={(e) => navigate("/user-profile")}
+            // noValidate
+            onSubmit={context.handleSignUp}
             sx={{
               mt: 3,
               marginTop: 5,
             }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   required
                   fullWidth
                   autoFocus
-                  id="firstName"
-                  name="firstName"
-                  label="First Name"
+                  id="username"
+                  name="userName"
+                  label="Username"
                   autoComplete="given-name"
-                  sx={{
-                    "& label": {
-                      color: "var(--color_i)",
-                    },
-                  }}
                   classes={{
                     root: classes.root,
                   }}
-                />
+                  onChange={context.handleSignUpForm}
+                  // value={context.signupForm.username}
+                  // error={context.signupForm.username === ""}
+                  // helperText={
+                  //   context.signupForm.username === "" ? "Required!" : " "
+                  // }
+                />{" "}
               </Grid>{" "}
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  name="lastName"
-                  label="Last Name"
-                  autoComplete="family-name"
-                  sx={{
-                    "& label": {
-                      color: "var(--color_i-clear",
-                    },
-                  }}
+                  autoFocus
+                  id="first_name"
+                  name="firstName"
+                  label="First Name"
+                  autoComplete="given-name"
                   classes={{
                     root: classes.root,
                   }}
+                  onChange={context.handleSignUpForm}
+                />{" "}
+              </Grid>{" "}
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="last_name"
+                  name="lastName"
+                  label="Last Name"
+                  autoComplete="family-name"
+                  classes={{
+                    root: classes.root,
+                  }}
+                  onChange={context.handleSignUpForm}
                 />{" "}
               </Grid>{" "}
               <Grid item xs={12}>
@@ -122,14 +145,10 @@ function Signup() {
                   id="email"
                   name="email"
                   label="Email Address"
-                  sx={{
-                    "& label": {
-                      color: "var(--color_i-clear)",
-                    },
-                  }}
                   classes={{
                     root: classes.root,
                   }}
+                  onChange={context.handleSignUpForm}
                 />{" "}
               </Grid>{" "}
               <Grid item xs={12}>
@@ -141,14 +160,25 @@ function Signup() {
                   type="password"
                   label="Password"
                   autoComplete="new-password"
-                  sx={{
-                    "& label": {
-                      color: "var(--color_four)",
-                    },
-                  }}
                   classes={{
                     root: classes.root,
                   }}
+                  onChange={context.handleSignUpForm}
+                />{" "}
+              </Grid>{" "}
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="re_password"
+                  name="rePpassword"
+                  type="password"
+                  label="Confirm Password"
+                  autoComplete="new-password"
+                  classes={{
+                    root: classes.root,
+                  }}
+                  onChange={context.handleSignUpForm}
                 />{" "}
               </Grid>{" "}
               <Grid item xs={12}>
@@ -191,11 +221,6 @@ function Signup() {
                 mt: 3,
                 mb: 2,
               }}
-              onClick={(e) =>
-                context.user === "client"
-                  ? navigate("/user-profile")
-                  : navigate("/admin-profile")
-              }
             >
               Sign Up{" "}
             </Button>{" "}
@@ -203,11 +228,12 @@ function Signup() {
               <Grid item>
                 <Link
                   underline="hover"
-                  href="/login"
                   variant="body2"
                   style={{
-                    color: "var(--color_seven)",
+                    color: "var(--color_e)",
+                    cursor: "pointer",
                   }}
+                  to="/login"
                 >
                   Already have an account ? Sign in
                 </Link>{" "}

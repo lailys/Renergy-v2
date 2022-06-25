@@ -1,27 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:700");
 
 :root {
-  --color_c: #013e92;
-  --color_c-clear: #013d92f0;
-  --color_d: #9bf051;
-  --color_d-clear: #9bf051d4;
-  --color_e: #f56acf;
-  --color_e-clear: #f56ad0a8;
+  --color_c: #023883;
+  --color_c-clear: #023883de;
+  --color_d: #82fa19;
+  --color_e: #dd16f3;
+  --color_e-clear: #dd16f3e4;
   --color_f: #454a5f;
   --color_f-clear: #606577;
   --color_g: #9bf051;
-  --color_g-clear: #9bf051f0;
+  --color_g-clear: #d6f9b723;
   --color_h: #51566c;
   --color_h-clear: #51566cc1;
   --color_i: #858999;
   --color_i-clear: #858999d6;
-  --color_j: #1a76d2;
-  --color_j-clear: #1a76d2eb;
+  --color_j: #1fb0ff;
+  --color_j-clear: #1eb0ffec;
   --color_k: #c4c4c4;
   --color_k-clear: #c4c4c4f5;
 }
 .main-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  /* border: solid 1px green; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 100vw;
+  max-width: 1678px;
+  /* height: 818px; */
+}
+.authentication-alert {
+  z-index: 1000;
+  /* border: solid 1px green; */
+  position: fixed;
+  left: 0;
+  top: 10px;
+  min-width: 100vw;
+  max-width: 1678px;
 }

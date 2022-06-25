@@ -1,11 +1,12 @@
 .register-page-container-form {
   /* border: solid red 1px; */
-  background: #fffffff3;
+  /* background: #fffffff3; */
   z-index: 3;
   position: absolute;
-  top: 12vh;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  top: 15vh;
+  left: 4vw;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px; */
   border-radius: 10px;
   width: 90vh;
   height: 80vh;

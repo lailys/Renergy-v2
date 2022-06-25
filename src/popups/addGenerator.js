@@ -28,7 +28,7 @@ function AddGenerator({ setTab }) {
         display: "grid",
         gridTemplateColumns: "repeat(1, 1fr)",
         gridTemplateRows:
-          context.user !== "client" ? "repeat(15, 1fr)" : "repeat(13, 1fr)",
+          context.userType !== "client" ? "repeat(15, 1fr)" : "repeat(13, 1fr)",
         gap: "0",
         boxShadow: "rgba(0, 0, 0, 0.12) 1px 5px 5px 4px",
         borderRadius: "10px",
@@ -106,7 +106,7 @@ function AddGenerator({ setTab }) {
       <div className="pop-row-box">
         <FullLengthInput title="Decomission Date" length="18vw" object="gen" />
       </div>{" "}
-      {context.user !== "client" ? (
+      {context.userType !== "client" ? (
         <>
           <div
             className="pop-row-box"

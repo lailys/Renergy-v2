@@ -36,12 +36,12 @@ function AddRec() {
         display: "grid",
         gridTemplateColumns: "repeat(1, 1fr)",
         gridTemplateRows:
-          context.user !== "client" ? "repeat(14, 1fr)" : "repeat(8, 1fr)",
+          context.userType !== "client" ? "repeat(14, 1fr)" : "repeat(8, 1fr)",
         gap: "1vh",
         boxShadow: "rgba(0, 0, 0, 0.12) 1px 5px 5px 4px",
         borderRadius: "10px",
         width: "40vw",
-        height: context.user !== "client" ? "40vw" : "30vw",
+        height: context.userType !== "client" ? "40vw" : "30vw",
       }}
     >
       <div className="pop-row-box"> </div>{" "}
@@ -61,7 +61,7 @@ function AddRec() {
           }}
           component="h2"
         >
-          {context.user !== "client" ? "Mint Request" : "REC Info"}{" "}
+          {context.userType !== "client" ? "Mint Request" : "REC Info"}{" "}
         </Typography>{" "}
       </div>{" "}
       <div className="pop-row-box">
@@ -97,7 +97,7 @@ function AddRec() {
           object="rec"
         />
       </div>{" "}
-      {context.user !== "client" ? (
+      {context.userType !== "client" ? (
         <>
           <div
             className="pop-row-box"

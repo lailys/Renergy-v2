@@ -1,40 +1,51 @@
-import React from "react";
-
-import backgroundImg from "../assets/landingPage2.jpg";
+import React, { useContext, useEffect } from "react";
+import { TbdContext } from "../provider/provider";
 
 import "./landingPage.css";
 
-import Button from "@mui/material/Button";
-import Backdrop from "../general/backdrop";
+import First from "./first";
+import Second from "./second";
+import Footer from "../navBar/footer";
+import Third from "./third";
+import Forth from "./forth";
+import Fifth from "./fifth";
 
 function LandingPage() {
+  const context = useContext(TbdContext);
+  if (!context) {
+    console.log("Context dose not exists- dashboard component -");
+  }
+
   return (
-    <div className="landing-page-container">
-      <Backdrop />
-      <div className="landing-page-container-text">
-        <div className="landing-page-container-text-header"> ENERGY REC </div>{" "}
-        <div className="landing-page-container-text-header-b">
-          {" "}
-          MARKETPLACE{" "}
-        </div>{" "}
-        <div className="landing-page-container-text-description">
-          Renewable Energy Certificates(RECs) are a market - based instrument
-          that certifies the bearer owns one megawatt - hour(MWh) of electricity
-          generated from a renewable energy resource.{" "}
-        </div>{" "}
-        <Button
-          variant="contained"
+    <div
+      className="landing-page-wrapper"
+      onScroll={context.handleScroll}
+      style={{
+        overflowY: context.landingPageFirstClicked ? "scroll" : "hidden",
+      }}
+    >
+      <div className="landing-page-container" onClick={context.catchFirstClick}>
+        <div
+          className="landing-page-container-arrow"
           style={{
-            padding: "1.5%",
-            background: "var(--color_j)",
-            marginTop: "10.8%",
-            borderRadius: "5px",
-            width: "20%",
+            position: context.dimensions.blobAPosition,
+            width: context.dimensions.blobAW,
+            height: context.dimensions.blobAH,
+            bottom: context.dimensions.blobABottom,
+            borderRadius: context.dimensions.blobARadius,
           }}
-        >
-          LEARN MORE{" "}
-        </Button>{" "}
-      </div>{" "}
+        />
+        <First />
+        {context.landingPageFirstClicked && (
+          <>
+            <Second />
+            <Third />
+            <Forth />
+            <Fifth />
+            <Footer />
+          </>
+        )}
+      </div>
     </div>
   );
 }

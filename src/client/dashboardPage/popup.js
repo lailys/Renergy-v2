@@ -7,7 +7,6 @@ import Retire from "../../popups/retire";
 import Withdraw from "../../popups/withdraw";
 
 function Popup({ tab, setTab }) {
-  console.log(tab, ":::::::>>>>");
   const popoupMap = {
     "add-generator": <AddGenerator setTab={setTab} />,
     "add-rec": <AddRec />,

@@ -121,9 +121,10 @@ function Dropdown({ title, type, length, height, object }) {
   const [value, setValue] = React.useState("");
 
   const options =
-    object === "action" && context.user === "client"
+    object === "action" && context.userType === "client"
       ? optionsMap[object].slice(0, 2)
       : optionsMap[type];
+
   const handleChange = (event) => {
     setValue(event.target.value);
     if (object === "rec") {

@@ -1,13 +1,12 @@
 import React from "react";
 import { useContext } from "react";
 import { TbdContext } from "../provider/provider";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   TextField,
   Button,
   Typography,
-  Link,
   Grid,
   Box,
   Container,
@@ -21,7 +20,7 @@ function Signin() {
   if (!context) {
     console.log("Context dose not exists- dashboard component -");
   }
-  const navigate = useNavigate();
+
   const muiTheme = createTheme({});
   const fullInputStyles = makeStyles((theme) =>
     createStyles({
@@ -43,13 +42,15 @@ function Signin() {
     })
   );
   const classes = fullInputStyles();
+
   return (
     <ThemeProvider theme={muiTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            // border: "solid red 1px",
+            marginTop: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -69,7 +70,7 @@ function Signin() {
           <Box
             component="form"
             noValidate
-            onSubmit={(e) => navigate("/user-dashboard")}
+            onSubmit={context.handleSiginUp}
             sx={{
               mt: 3,
               marginTop: 8,
@@ -81,7 +82,7 @@ function Signin() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
                   sx={{
@@ -92,6 +93,7 @@ function Signin() {
                   classes={{
                     root: classes.root,
                   }}
+                  onChange={context.handleSignInForm}
                 />{" "}
               </Grid>{" "}
               <Grid item xs={12}>
@@ -111,6 +113,7 @@ function Signin() {
                   classes={{
                     root: classes.root,
                   }}
+                  onChange={context.handleSignInForm}
                 />{" "}
               </Grid>{" "}
               <Grid item xs={12}>
@@ -129,11 +132,6 @@ function Signin() {
                 mt: 3,
                 mb: 2,
               }}
-              onClick={(e) =>
-                context.user === "client"
-                  ? navigate("/user-dashboard")
-                  : navigate("/admin-dashboard")
-              }
             >
               Sign In{" "}
             </Button>{" "}
@@ -141,11 +139,12 @@ function Signin() {
               <Grid item>
                 <Link
                   underline="hover"
-                  href="/signup"
                   variant="body2"
                   style={{
                     color: "var(--color_e-clear)",
+                    cursor: "pointer",
                   }}
+                  to="/signup"
                 >
                   Do not have an account ? Sign up here{" "}
                 </Link>{" "}

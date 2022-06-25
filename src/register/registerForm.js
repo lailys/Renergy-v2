@@ -41,7 +41,7 @@ function RegisterForm() {
         }}
         component="h2"
       >
-        {context.user === "client" ? "Register User" : "Admin User"}{" "}
+        {context.userType === "client" ? "Register User" : "Admin User"}{" "}
       </Typography>{" "}
       <div className="form-check-box">
         <div>
@@ -79,7 +79,7 @@ function RegisterForm() {
       <div className="form-row-box">
         <FullLengthInput title="Phone" length="85.5vh" />
       </div>{" "}
-      {context.user === "client" ? (
+      {context.userType === "client" ? (
         <div className="form-row-box">
           {" "}
           <Button

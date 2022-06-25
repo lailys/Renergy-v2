@@ -1,5 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Router } from "react-router-dom";
 import { TbdContextComp } from "./provider/provider";
+import { useDispatch, useSelector } from "react-redux";
+
+import { history } from "./redux/helpers/history";
+import { alertActions } from "./redux/actions/alert.actions";
+import { PrivateRoute } from "./redux/components/PrivateRoute";
 
 import "./App.css";
 
@@ -12,10 +18,25 @@ import AdminBasePage from "./admin/adminBasePage/adminBasePage";
 import ClientBasePage from "./client/clientBasePage/clientBasePage";
 
 function App() {
+  const alert = useSelector((state) => state.alert);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    history.listen((location, action) => {
+      // clear alert on location change
+      dispatch(alertActions.clear());
+    });
+  }, []);
   return (
     <TbdContextComp>
       <div className="main-container">
-        <NavBar />
+        {" "}
+        <NavBar />{" "}
+        {alert.message && (
+          <div className={`alert ${alert.type}` + " authentication-alert"}>
+            {" "}
+            {alert.message}{" "}
+          </div>
+        )}{" "}
         <Routes>
           <Route exact path="/" element={<LandingPage />} />{" "}
           <Route exact path="/marketPlace" element={<MarketPlace />} />{" "}

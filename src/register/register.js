@@ -10,10 +10,17 @@ function Register() {
   const navigate = useNavigate();
   return (
     <div className="sign-page-container">
-      <AuthBackdrop />
-      <div className="register-page-container-form">
-        <RegisterForm />
-      </div>{" "}
+      <div className="sign-page-container-shade">
+        <div className="sign-page-container-shade">
+          <div className="sign-page-container-shade">
+            <div className="sign-page-container-shade">
+              <div className="register-page-container-form">
+                <RegisterForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

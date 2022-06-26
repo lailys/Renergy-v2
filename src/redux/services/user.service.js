@@ -1,12 +1,10 @@
 // import config from 'config';
-import {
-  authHeader
-} from '../helpers/auth-header';
+import { authHeader } from "../helpers/auth-header";
 
 import axios from "axios";
 
 export const userService = {
-  //   login,
+  login,
   logout,
   register,
   activate,
@@ -17,7 +15,6 @@ export const userService = {
 };
 
 function handleError(err) {
-  console.log(err, "--------")
   let error = [];
   if (err.response) {
     // Request made and server responded
@@ -26,32 +23,23 @@ function handleError(err) {
     console.log(err.response.headers);
     error = [err.response.status];
     for (let i in err.response.data) {
-      error.push(err.response.data[i][0])
+      error.push(err.response.data[i][0]);
     }
   } else if (err.request) {
-    // The request was made but no response was received
     console.log(err.request);
-    error = ["Unknown error has been occured"]
+    error = ["Unknown error has been occured"];
   } else {
-    // Something happened in setting up the request that triggered an Error
-    console.log('Error', err.message);
+    console.log("Error", err.message);
     error = [err.message];
   }
-  console.log(error, "<=======")
-
-
-  return Promise.reject(error.join(' '));
+  return Promise.reject(error.join(" "));
 }
 
 function logout() {
-  // remove user from local storage to log user out
-  localStorage.removeItem('user');
+  localStorage.removeItem("user");
 }
 
-function activate(user) {}
-
 function register(user) {
-  console.log(user)
   var config = {
     method: "post",
     url: "http://127.0.0.1:3000/auth/users/",
@@ -59,36 +47,42 @@ function register(user) {
     headers: {},
   };
 
-
-  return axios(config).then(response => {
-    console.log(response, "-----------?????????")
-    return response
-  }).catch(handleError);
+  return axios(config)
+    .then((response) => {
+      return response;
+    })
+    .catch(handleError);
 }
 
-// function login(username, password) {
-//   //   const requestOptions = {
-//   //     method: 'POST',
-//   //     headers: {
-//   //       'Content-Type': 'application/json'
-//   //     },
-//   //     body: JSON.stringify({
-//   //       username,
-//   //       password
-//   //     })
-//   //   };
+function activate(info) {
+  var config = {
+    method: "post",
+    url: "http://127.0.0.1:3000/auth/users/activation/",
+    data: info,
+    headers: {},
+  };
 
-//   //   return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-//   //     .then(handleResponse)
-//   //     .then(user => {
-//   //       // store user details and jwt token in local storage to keep user logged in between page refreshes
-//   //       localStorage.setItem('user', JSON.stringify(user));
+  return axios(config)
+    .then((response) => {
+      return response;
+    })
+    .catch(handleError);
+}
 
-//   //       return user;
-//   //     });
-// }
+function login(user) {
+  var config = {
+    method: "post",
+    url: "http://127.0.0.1:3000/auth/jwt/create",
+    headers: {},
+    data: user,
+  };
 
-
+  return axios(config)
+    .then((response) => {
+      return response;
+    })
+    .catch(handleError);
+}
 
 // function getAll() {
 //   const requestOptions = {
@@ -107,8 +101,6 @@ function register(user) {
 
 //   //   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 // }
-
-
 
 // function update(user) {
 //   const requestOptions = {

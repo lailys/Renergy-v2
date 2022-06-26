@@ -12,7 +12,7 @@ import {
 } from '../helpers/history';
 
 export const userActions = {
-  //   login,
+  login,
   logout,
   register,
   activate,
@@ -27,51 +27,6 @@ function logout() {
   };
 }
 
-function activate(info) {
-  return dispatch => {
-    dispatch(request(info));
-    return userService.activate(info)
-      .then(
-        user => {
-          if (user.status === 201) {
-            dispatch(success());
-            dispatch(alertActions.success('successful activation'));
-          }
-          if (user.status === 400) {
-            dispatch(failure(user.toString()));
-            // dispatch(alertActions.error(user.toString()));
-
-          }
-        },
-        error => {
-          dispatch(failure(error.toString()));
-          //   dispatch(alertActions.error(error.toString()));
-        }
-      );
-
-    function request(info) {
-      return {
-        type: userConstants.ACTIVATE_REQUEST,
-        info
-      }
-    }
-
-    function success(info) {
-      return {
-        type: userConstants.ACTIVATE_SUCCESS,
-        info
-      }
-    }
-
-    function failure(error) {
-      return {
-        type: userConstants.ACTIVATE_FAILURE,
-        error
-      }
-    }
-  }
-}
-
 function register(user) {
   return dispatch => {
     dispatch(request(user));
@@ -81,7 +36,7 @@ function register(user) {
         user => {
           if (user.status === 201) {
             dispatch(success());
-            dispatch(alertActions.success('Registration successful'));
+            dispatch(alertActions.success('Registration successful, Check your email for activation'));
           }
           if (user.status === 400) {
             dispatch(failure(user.toString()));
@@ -118,46 +73,90 @@ function register(user) {
   }
 }
 
-// function login(username, password, from) {
-//   return dispatch => {
-//     dispatch(request({
-//       username
-//     }));
+function activate(info) {
+  return dispatch => {
+    dispatch(request(info));
+    return userService.activate(info)
+      .then(
+        user => {
+          if (user.status >= 200 && user.status < 300) {
+            dispatch(success());
+            dispatch(alertActions.success('successful activation'));
+          }
+          if (user.status === 400) {
+            dispatch(failure(user.toString()));
+            dispatch(alertActions.error(user.toString()));
 
-//     userService.login(username, password)
-//       .then(
-//         user => {
-//           dispatch(success(user));
-//           history.push(from);
-//         },
-//         error => {
-//           dispatch(failure(error.toString()));
-//           dispatch(alertActions.error(error.toString()));
-//         }
-//       );
-//   };
+          }
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        }
+      );
 
-//   function request(user) {
-//     return {
-//       type: userConstants.LOGIN_REQUEST,
-//       user
-//     }
-//   }
+    function request(info) {
+      return {
+        type: userConstants.ACTIVATE_REQUEST,
+        info
+      }
+    }
 
-//   function success(user) {
-//     return {
-//       type: userConstants.LOGIN_SUCCESS,
-//       user
-//     }
-//   }
+    function success(info) {
+      return {
+        type: userConstants.ACTIVATE_SUCCESS,
+        info
+      }
+    }
 
-//   function failure(error) {
-//     return {
-//       type: userConstants.LOGIN_FAILURE,
-//       error
-//     }
-//   }
-// }
+    function failure(error) {
+      return {
+        type: userConstants.ACTIVATE_FAILURE,
+        error
+      }
+    }
+  }
+}
+
+function login(user) {
+  return dispatch => {
+    dispatch(request({
+      user: user.username
+    }));
+
+    userService.login(user)
+      .then(
+        user => {
+          dispatch(success(user));
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        }
+      );
+  };
+
+  function request(user) {
+    return {
+      type: userConstants.LOGIN_REQUEST,
+      user
+    }
+  }
+
+  function success(user) {
+    return {
+      type: userConstants.LOGIN_SUCCESS,
+      user
+    }
+  }
+
+  function failure(error) {
+    return {
+      type: userConstants.LOGIN_FAILURE,
+      error
+    }
+  }
+}
 
 
 

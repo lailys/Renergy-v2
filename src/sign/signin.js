@@ -70,7 +70,7 @@ function Signin() {
           <Box
             component="form"
             noValidate
-            onSubmit={context.handleSiginUp}
+            onSubmit={context.handleSigIn}
             sx={{
               mt: 3,
               marginTop: 8,
@@ -82,7 +82,7 @@ function Signin() {
                   required
                   fullWidth
                   id="email"
-                  label="Email"
+                  label="email"
                   name="email"
                   autoComplete="email"
                   sx={{

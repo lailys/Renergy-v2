@@ -55,31 +55,7 @@ export const TbdContextComp = ({ children }) => {
     blobArrowColor: "white",
     blobArrowOpacity: "0",
   });
-  const handleSignInForm = (e) => {
-    const { id, value } = e.target;
-    setSigninForm((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-  const handleSiginUp = (e) => {
-    e.preventDefault();
-    var config = {
-      method: "post",
-      url: "http://127.0.0.1:3000/auth/jwt/create",
-      headers: signinForm,
-      data: {},
-    };
 
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        navigate("/login");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
   const handleSignUpForm = (e) => {
     const { id, value } = e.target;
     setSignupForm((prevState) => ({
@@ -99,11 +75,27 @@ export const TbdContextComp = ({ children }) => {
       signupForm.password === signupForm.re_password
     ) {
       dispatch(userActions.register(signupForm));
-      navigate("/login");
     }
   };
   const activateAccount = (e) => {
     console.log(window.location.href.split("/activate/")[1].split("/"));
+    const keyList = window.location.href.split("/activate/")[1].split("/");
+    dispatch(userActions.activate({ uid: keyList[0], token: keyList[1] }));
+    navigate("/login");
+  };
+  const handleSignInForm = (e) => {
+    const { id, value } = e.target;
+    setSigninForm((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+  const handleSigIn = (e) => {
+    e.preventDefault();
+    console.log("***", signinForm, "***");
+    if (signinForm.email && signinForm.password) {
+      dispatch(userActions.login(signinForm));
+    }
   };
   const handleScroll = (e) => {
     console.log(window.innerHeight, " window.pageYOffset", e.target.scrollTop);
@@ -185,11 +177,11 @@ export const TbdContextComp = ({ children }) => {
         setUserType,
         handleScroll,
         setOpenedTab,
-        handleSignUp,
-        handleSiginUp,
         setDimensions,
         catchFirstClick,
         activateAccount,
+        handleSigIn,
+        handleSignUp,
         handleSignInForm,
         handleSignUpForm,
         setScrollPosition,

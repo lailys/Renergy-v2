@@ -29,48 +29,51 @@ function App() {
   return (
     <TbdContextComp>
       <div className="main-container">
-        {" "}
-        <NavBar />{" "}
+        <NavBar />
         {alert.message && (
           <div className={`alert ${alert.type}` + " authentication-alert"}>
-            {" "}
-            {alert.message}{" "}
+            {alert.message}
           </div>
-        )}{" "}
+        )}
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />{" "}
-          <Route exact path="/marketPlace" element={<MarketPlace />} />{" "}
-          <Route exact path="/login" element={<Sign type="in" />} />{" "}
-          <Route exact path="/signup" element={<Sign type="up" />} />{" "}
-          <Route exact path="/user-profile" element={<Register />} />{" "}
-          <Route exact path="/admin-profile" element={<Register />} />{" "}
+          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/marketPlace" element={<MarketPlace />} />
+          <Route
+            exact
+            path="/activate/:id/:code"
+            element={<Sign type="activate" />}
+          />
+          <Route exact path="/login" element={<Sign type="in" />} />
+          <Route exact path="/signup" element={<Sign type="up" />} />
+          <Route exact path="/user-profile" element={<Register />} />
+          <Route exact path="/admin-profile" element={<Register />} />
           <Route
             exact
             path="/user-dashboard"
             element={<ClientBasePage type="/user-dashboard" />}
-          />{" "}
+          />
           <Route
             exact
             path="/admin-dashboard"
             element={<AdminBasePage type="/admin-dashboard" />}
-          />{" "}
+          />
           <Route
             exact
             path="/admin-user-list"
             element={<AdminBasePage type="/admin-user-list" />}
-          />{" "}
+          />
           <Route
             exact
             path="/admin-generator-list"
             element={<AdminBasePage type="/admin-generator-list" />}
-          />{" "}
+          />
           <Route
             exact
             path="/admin-token-list"
             element={<AdminBasePage type="/admin-token-list" />}
-          />{" "}
-        </Routes>{" "}
-      </div>{" "}
+          />
+        </Routes>
+      </div>
     </TbdContextComp>
   );
 }

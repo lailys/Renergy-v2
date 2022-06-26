@@ -102,6 +102,9 @@ export const TbdContextComp = ({ children }) => {
       navigate("/login");
     }
   };
+  const activateAccount = (e) => {
+    console.log(window.location.href.split("/activate/")[1].split("/"));
+  };
   const handleScroll = (e) => {
     console.log(window.innerHeight, " window.pageYOffset", e.target.scrollTop);
     const position = window.pageYOffset;
@@ -182,10 +185,11 @@ export const TbdContextComp = ({ children }) => {
         setUserType,
         handleScroll,
         setOpenedTab,
-        setDimensions,
-        catchFirstClick,
         handleSignUp,
         handleSiginUp,
+        setDimensions,
+        catchFirstClick,
+        activateAccount,
         handleSignInForm,
         handleSignUpForm,
         setScrollPosition,

@@ -15,6 +15,7 @@ export const userActions = {
   //   login,
   logout,
   register,
+  activate,
   //   getAll,
   //   delete: _delete
 };
@@ -24,6 +25,51 @@ function logout() {
   return {
     type: userConstants.LOGOUT
   };
+}
+
+function activate(info) {
+  return dispatch => {
+    dispatch(request(info));
+    return userService.activate(info)
+      .then(
+        user => {
+          if (user.status === 201) {
+            dispatch(success());
+            dispatch(alertActions.success('successful activation'));
+          }
+          if (user.status === 400) {
+            dispatch(failure(user.toString()));
+            // dispatch(alertActions.error(user.toString()));
+
+          }
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          //   dispatch(alertActions.error(error.toString()));
+        }
+      );
+
+    function request(info) {
+      return {
+        type: userConstants.ACTIVATE_REQUEST,
+        info
+      }
+    }
+
+    function success(info) {
+      return {
+        type: userConstants.ACTIVATE_SUCCESS,
+        info
+      }
+    }
+
+    function failure(error) {
+      return {
+        type: userConstants.ACTIVATE_FAILURE,
+        error
+      }
+    }
+  }
 }
 
 function register(user) {

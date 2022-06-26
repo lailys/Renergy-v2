@@ -4,6 +4,7 @@ import "./sign.css";
 
 import Signin from "./signin";
 import Signup from "./signup";
+import Activate from "./Activate";
 
 function Sign({ type }) {
   return (
@@ -16,7 +17,13 @@ function Sign({ type }) {
               <div className="sign-page-container-shade">
                 <div className="sign-page-container-form">
                   {" "}
-                  {type === "in" ? <Signin /> : <Signup />}{" "}
+                  {type === "in" ? (
+                    <Signin />
+                  ) : type === "up" ? (
+                    <Signup />
+                  ) : (
+                    <Activate />
+                  )}{" "}
                 </div>{" "}
               </div>{" "}
             </div>{" "}

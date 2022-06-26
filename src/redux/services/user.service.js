@@ -9,6 +9,7 @@ export const userService = {
   //   login,
   logout,
   register,
+  activate,
   //   getAll,
   //   getById,
   //   update,
@@ -46,6 +47,8 @@ function logout() {
   // remove user from local storage to log user out
   localStorage.removeItem('user');
 }
+
+function activate(user) {}
 
 function register(user) {
   console.log(user)

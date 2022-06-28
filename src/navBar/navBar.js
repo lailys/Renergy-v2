@@ -26,7 +26,7 @@ function NavBar() {
     border: "none",
     height: "5vh",
   };
-
+  console.log(context.loading, "+++++++++++++++++++++");
   return (
     <Grid
       container
@@ -93,8 +93,8 @@ function NavBar() {
         <Button style={btnStyle} onClick={(e) => navigate("/marketplace")}>
           marketplace{" "}
         </Button>{" "}
-        {context.authTokens && context.user ? (
-          <Button style={btnStyle} onClick={context.signout}>
+        {context.loading ? (
+          <Button style={btnStyle} onClick={context.handleSigOut}>
             logout{" "}
           </Button>
         ) : (

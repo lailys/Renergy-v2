@@ -11,11 +11,14 @@ import {
   history
 } from '../helpers/history';
 
+import jwt_decode from "jwt-decode";
+
 export const userActions = {
   login,
   logout,
   register,
   activate,
+  refreshToken,
   //   getAll,
   //   delete: _delete
 };
@@ -127,7 +130,10 @@ function login(user) {
     userService.login(user)
       .then(
         user => {
-          dispatch(success(user));
+          const currUser = jwt_decode(user.data.access)
+          localStorage.setItem("authTokens", JSON.stringify(user.data));
+          localStorage.setItem("user", currUser);
+          dispatch(success(user, currUser));
         },
         error => {
           dispatch(failure(error.toString()));
@@ -137,22 +143,65 @@ function login(user) {
   };
 
   function request(user) {
+
     return {
       type: userConstants.LOGIN_REQUEST,
-      user
+      user,
     }
   }
 
-  function success(user) {
+  function success(user, curr) {
     return {
       type: userConstants.LOGIN_SUCCESS,
-      user
+      user,
+      curr
     }
   }
 
   function failure(error) {
     return {
       type: userConstants.LOGIN_FAILURE,
+      error
+    }
+  }
+}
+
+function refreshToken(access) {
+  return dispatch => {
+    dispatch(request({
+      access
+    }));
+
+    userService.login(access)
+      .then(
+        user => {
+          localStorage.setItem("user", JSON.stringify(user));
+          dispatch(success(access));
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        }
+      );
+  };
+
+  function request(access) {
+    return {
+      type: userConstants.REFRESH_TOKEN__REQUEST,
+      access
+    }
+  }
+
+  function success(access) {
+    return {
+      type: userConstants.REFRESH_TOKEN__SUCCESS,
+      access
+    }
+  }
+
+  function failure(error) {
+    return {
+      type: userConstants.REFRESH_TOKEN__FAILURE,
       error
     }
   }

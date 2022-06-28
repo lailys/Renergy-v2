@@ -8,6 +8,7 @@ export const userService = {
   logout,
   register,
   activate,
+  refreshToken,
   //   getAll,
   //   getById,
   //   update,
@@ -34,11 +35,6 @@ function handleError(err) {
   }
   return Promise.reject(error.join(" "));
 }
-
-function logout() {
-  localStorage.removeItem("user");
-}
-
 function register(user) {
   var config = {
     method: "post",
@@ -83,44 +79,21 @@ function login(user) {
     })
     .catch(handleError);
 }
+function logout() {
+  localStorage.removeItem("user");
+  localStorage.removeItem("authTokens");
+}
+function refreshToken(user) {
+  var config = {
+    method: "post",
+    url: "http://127.0.0.1:3000/auth/jwt/create",
+    headers: {},
+    data: user,
+  };
 
-// function getAll() {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: authHeader()
-//   };
-
-//   //   return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-// }
-
-// function getById(id) {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: authHeader()
-//   };
-
-//   //   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
-
-// function update(user) {
-//   const requestOptions = {
-//     method: 'PUT',
-//     headers: {
-//       ...authHeader(),
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(user)
-//   };
-
-//   //   return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
-// }
-
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//   const requestOptions = {
-//     method: 'DELETE',
-//     headers: authHeader()
-//   };
-
-//   //   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-// }
+  return axios(config)
+    .then((response) => {
+      return response;
+    })
+    .catch(handleError);
+}

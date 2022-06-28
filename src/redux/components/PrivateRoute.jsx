@@ -1,26 +1,20 @@
-import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Route } from "react-router-dom";
+import { TbdContext } from "../../provider/provider";
+
 import Sign from "../../sign/sign";
 
-function PrivateRoute({ component: Component, roles, ...rest }) {
-  const navigate = useNavigate();
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (!localStorage.getItem("user")) {
-          // not logged in so redirect to login page with the return url
-          return (
-            <Routes>
-              <Route exact path="/login" element={<Sign type="in" />} />
-            </Routes>
-          );
-        }
+import React from "react";
 
-        return <Component {...props} />;
-      }}
-    />
-  );
+function PrivateRoute({ Component }) {
+  const context = useContext(TbdContext);
+  if (!context) {
+    console.log("Context dose not exists- dashboard component -");
+  }
+  const user = context.user;
+  console.log(Component, "*****", user);
+
+  return !user ? <Sign type="in" /> : Component;
 }
 
-export { PrivateRoute };
+export default PrivateRoute;

@@ -1,8 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { authentication } from "../redux/reducers/authentication.reducer";
 
 import axios from "axios";
+
+import jwt_decode from "jwt-decode";
 
 import { userActions } from "../redux/actions/user.actions";
 
@@ -11,23 +14,31 @@ export const TbdContext = React.createContext();
 export const TbdContextProvider = TbdContext.Provider;
 export const TbdContextConsumer = TbdContext.Consumer;
 
-export const TbdContextComp = ({ children }) => {
+export const TbdContextComp = ({ children, store }) => {
+  console.log(
+    "5555>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>."
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     dispatch(userActions.logout());
-  // }, []);
-
   const landing1Ref = useRef(null);
-  const [landingPageFirstClicked, setLandingPageFirstClicked] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [userType, setUserType] = useState("client");
-  const [openedTab, setOpenedTab] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [newRec, setNewRec] = useState({});
   const [signupForm, setSignupForm] = useState({});
   const [signinForm, setSigninForm] = useState({});
+  const [authToken, setAuthToken] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
+  const [user, setUser] = useState(() =>
+    localStorage.getItem("user") ? localStorage.getItem("user") : null
+  );
+  const [userType, setUserType] = useState("client");
+  const [landingPageFirstClicked, setLandingPageFirstClicked] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [openedTab, setOpenedTab] = useState("");
+  let [loading, setLoading] = useState(true);
+  const [errMsg, setErrMsg] = useState("");
+  const [newRec, setNewRec] = useState({});
   const [dimensions, setDimensions] = useState({
     border: "solid red 1px",
     left: "0px",
@@ -55,7 +66,19 @@ export const TbdContextComp = ({ children }) => {
     blobArrowColor: "white",
     blobArrowOpacity: "0",
   });
-
+  store.subscribe(() => {
+    const currState = store.getState().authentication;
+    console.log(currState, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^???");
+    if (currState.loggedIn) {
+      setUser(currState.user);
+    } else {
+      setUser(null);
+      setLoading(false);
+    }
+  });
+  useEffect(() => {
+    setLoading(user ? true : false);
+  }, [user]);
   const handleSignUpForm = (e) => {
     const { id, value } = e.target;
     setSignupForm((prevState) => ({
@@ -92,10 +115,13 @@ export const TbdContextComp = ({ children }) => {
   };
   const handleSigIn = (e) => {
     e.preventDefault();
-    console.log("***", signinForm, "***");
     if (signinForm.email && signinForm.password) {
       dispatch(userActions.login(signinForm));
     }
+  };
+  const handleSigOut = (e) => {
+    e.preventDefault();
+    dispatch(userActions.logout(signinForm));
   };
   const handleScroll = (e) => {
     console.log(window.innerHeight, " window.pageYOffset", e.target.scrollTop);
@@ -164,8 +190,10 @@ export const TbdContextComp = ({ children }) => {
   return (
     <TbdContextProvider
       value={{
+        user,
         newRec,
         userType,
+        loading,
         openedTab,
         signupForm,
         dimensions,
@@ -184,6 +212,7 @@ export const TbdContextComp = ({ children }) => {
         handleSignUp,
         handleSignInForm,
         handleSignUpForm,
+        handleSigOut,
         setScrollPosition,
         setLandingPageFirstClicked,
       }}

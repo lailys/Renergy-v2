@@ -8,18 +8,19 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/helpers/store";
 import { history } from "./redux/helpers/history";
+import setupInterceptors from "./redux/services/setupInterceptors";
 
 ReactDOM.render(
   <BrowserRouter history={history}>
     <Provider store={store}>
       <React.StrictMode>
-        <App />
+        <App store={store} />
       </React.StrictMode>{" "}
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
-
+setupInterceptors(store);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

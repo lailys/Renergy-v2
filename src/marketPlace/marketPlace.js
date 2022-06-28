@@ -13,7 +13,7 @@ import AuthBackdrop from "../general/authBackdrop";
 function MarketPlace() {
   return (
     <div className="marketplace-page-container">
-      <AuthBackdrop />
+      {/* <AuthBackdrop /> */}
       <Box
         sx={{
           // border: "solid 1px red",

@@ -15,7 +15,6 @@ function Cube({ styleInfo, className, height }) {
           }}
         >
           {" "}
-          {/* <img src={backgroundLanding} alt="side-img" /> */}{" "}
         </div>{" "}
         <div
           className="square2"
@@ -24,12 +23,8 @@ function Cube({ styleInfo, className, height }) {
           }}
         >
           {" "}
-          {/* <img src={backgroundLanding} alt="side-img2" /> */}{" "}
         </div>{" "}
-        <div className="square3">
-          {" "}
-          {/* <img src={backgroundLanding} alt="side-img3" /> */}{" "}
-        </div>{" "}
+        <div className="square3"> </div>{" "}
       </div>{" "}
     </div>
   );

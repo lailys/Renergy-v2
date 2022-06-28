@@ -102,9 +102,14 @@ function MarketplaceList() {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={index + "row"}
+                  >
                     {columns.slice(0, 7).map((column) => {
                       const value = row[column.id];
                       return (

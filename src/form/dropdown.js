@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
 import { createStyles, makeStyles } from "@mui/styles";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 
 const optionsMap = {
   changeGenerator: [],
@@ -20,14 +20,8 @@ const optionsMap = {
     ["Retire", "retire"],
     ["Transfer", "transfer"],
   ],
-  alreadyListedGenerator: [
-    ["AL", "Alabama"],
-    ["AK", "Alaska"],
-  ],
-  generatorType: [
-    ["AL", "Alabama"],
-    ["AK", "Alaska"],
-  ],
+  alreadyListedGenerator: [],
+  generatorType: [],
   customerClass: [],
   certifyingBody: [],
   country: [],
@@ -92,6 +86,11 @@ const optionsMap = {
     ["WI", "Wisconsin"],
     ["WY", "Wyoming"],
   ],
+  orderType: [
+    ["ALL", "ALL"],
+    ["BUY", "BUY"],
+    ["SELL", "SELL"],
+  ],
 };
 
 const dropdownStyle = makeStyles((theme) =>
@@ -149,7 +148,6 @@ function Dropdown({ title, type, length, height, object }) {
       sx={{
         zIndex: "19",
         width: `${length}`,
-        // border: "solid green 1px",
       }}
     >
       <FormControl fullWidth id="form-dropdown-css">
@@ -160,7 +158,6 @@ function Dropdown({ title, type, length, height, object }) {
             fontSize: ".8rem",
             top: "-20%",
             color: "var(--color_k)",
-            // color: "var(--color_c)",
             fontWeight: "300",
             "&.MuiInputLabel-shrink": {
               top: ".3vh",

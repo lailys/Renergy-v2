@@ -1,5 +1,3 @@
-import React from "react";
-
 import MarketplaceList from "../admin/list/marketplaceList";
 
 import "./marketplace.css";
@@ -8,7 +6,6 @@ import Dropdown from "../form/dropdown";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import AuthBackdrop from "../general/authBackdrop";
 
 function MarketPlace() {
   return (
@@ -64,9 +61,9 @@ function MarketPlace() {
               }}
               component="h2"
             >
-              Filter by:{" "}
-            </Typography>{" "}
-          </div>{" "}
+              Filter by:
+            </Typography>
+          </div>
           <div className="filter-row-box ">
             <Dropdown
               title="Generator Type"
@@ -74,7 +71,7 @@ function MarketPlace() {
               length="9.5vw"
               object="gen"
             />
-          </div>{" "}
+          </div>
           <div className="filter-row-box ">
             <Dropdown
               title="Certifying Body"
@@ -82,10 +79,10 @@ function MarketPlace() {
               length="9.5vw"
               object="gen"
             />
-          </div>{" "}
+          </div>
           <div className="filter-row-box ">
             <Dropdown title="state" type="state" length="5.5vw" object="gen" />
-          </div>{" "}
+          </div>
           <div className="filter-row-box ">
             <Dropdown
               title="Vintage date start range"
@@ -93,7 +90,7 @@ function MarketPlace() {
               length="13vw"
               object="gen"
             />
-          </div>{" "}
+          </div>
           <div className="filter-row-box ">
             <Dropdown
               title="Vintage date end range"
@@ -101,7 +98,7 @@ function MarketPlace() {
               length="13vw"
               object="gen"
             />
-          </div>{" "}
+          </div>
           <div className="filter-row-box ">
             <Dropdown
               title="Quantity"
@@ -109,7 +106,15 @@ function MarketPlace() {
               length="7vw"
               object="gen"
             />
-          </div>{" "}
+          </div>
+          <div className="filter-row-box ">
+            <Dropdown
+              title="Order Type"
+              type="orderType"
+              length="7vw"
+              object="gen"
+            />
+          </div>
         </Box>
 
         <MarketplaceList />

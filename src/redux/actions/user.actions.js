@@ -19,16 +19,12 @@ export const userActions = {
   register,
   activate,
   refreshToken,
+  getMarket,
   //   getAll,
   //   delete: _delete
 };
 
-function logout() {
-  userService.logout();
-  return {
-    type: userConstants.LOGOUT
-  };
-}
+
 
 function register(user) {
   return dispatch => {
@@ -133,7 +129,8 @@ function login(user) {
           const currUser = jwt_decode(user.data.access)
           localStorage.setItem("authTokens", JSON.stringify(user.data));
           localStorage.setItem("user", currUser);
-          dispatch(success(user, currUser));
+          localStorage.setItem("isAdmin", user.data.is_superuser);
+          dispatch(success(user, currUser, user.data.is_superuser));
         },
         error => {
           dispatch(failure(error.toString()));
@@ -150,11 +147,13 @@ function login(user) {
     }
   }
 
-  function success(user, curr) {
+  function success(user, curr, isAdmin) {
+    console.log(user, curr, isAdmin, "user, curr, isAdmin")
     return {
       type: userConstants.LOGIN_SUCCESS,
       user,
-      curr
+      curr,
+      isAdmin
     }
   }
 
@@ -166,16 +165,26 @@ function login(user) {
   }
 }
 
+function logout() {
+  userService.logout();
+  return {
+    type: userConstants.LOGOUT
+  };
+}
+
 function refreshToken(access) {
   return dispatch => {
     dispatch(request({
       access
     }));
 
-    userService.login(access)
+    userService.refreshToken()
       .then(
         user => {
-          localStorage.setItem("user", JSON.stringify(user));
+          const updatedAuthToken = JSON.parse(localStorage.getItem("authTokens"));
+          updatedAuthToken.access = access;
+          localStorage.setItem("authTokens", JSON.stringify(updatedAuthToken));
+          localStorage.setItem("user", jwt_decode(access));
           dispatch(success(access));
         },
         error => {
@@ -207,39 +216,37 @@ function refreshToken(access) {
   }
 }
 
+function getMarket() {
+  return dispatch => {
+    dispatch(request());
+    userService.getMarket()
+      .then(
+        tokens => dispatch(success(tokens)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
 
+  function request() {
+    return {
+      type: userConstants.TOKEN_LIST_REQUEST
+    }
+  }
 
-// function getAll() {
-//   return dispatch => {
-//     dispatch(request());
+  function success(tokens) {
+    return {
+      type: userConstants.TOKEN_LIST_SUCCESS,
+      tokens
+    }
+  }
 
-//     userService.getAll()
-//       .then(
-//         users => dispatch(success(users)),
-//         error => dispatch(failure(error.toString()))
-//       );
-//   };
-
-//   function request() {
-//     return {
-//       type: userConstants.GETALL_REQUEST
-//     }
-//   }
-
-//   function success(users) {
-//     return {
-//       type: userConstants.GETALL_SUCCESS,
-//       users
-//     }
-//   }
-
-//   function failure(error) {
-//     return {
-//       type: userConstants.GETALL_FAILURE,
-//       error
-//     }
-//   }
-// }
+  function failure(error) {
+    return {
+      type: userConstants.TOKEN_LIST_FAILURE,
+      tokens: [],
+      error
+    }
+  }
+}
 
 // // prefixed function name with underscore because delete is a reserved word in javascript
 // function _delete(id) {

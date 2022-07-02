@@ -26,7 +26,6 @@ function NavBar() {
     border: "none",
     height: "5vh",
   };
-  console.log(context.loading, "+++++++++++++++++++++");
   return (
     <Grid
       container
@@ -84,13 +83,13 @@ function NavBar() {
           height: "5vh",
         }}
       >
-        <Button style={btnStyle} onClick={(e) => navigate("/fqa")}>
-          pricing{" "}
+        <Button style={btnStyle} onClick={(e) => navigate("/payment")}>
+          payment{" "}
         </Button>{" "}
         <Button style={btnStyle} onClick={(e) => navigate("/fqa")}>
           FAQ{" "}
         </Button>{" "}
-        <Button style={btnStyle} onClick={(e) => navigate("/marketplace")}>
+        <Button style={btnStyle} onClick={context.getToMarket}>
           marketplace{" "}
         </Button>{" "}
         {context.loading ? (

@@ -1,39 +1,13 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const TokenService = {
-  getLocalRefreshToken,
-  getLocalAccessToken,
-  updateLocalAccessToken,
-  getUser,
-  setUser,
-  removeUser,
+  refreshToken,
 };
 
-function getLocalRefreshToken() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user ? user.refresh : null;
-};
-
-function getLocalAccessToken() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user ? user.access : null;
-};
-
-function updateLocalAccessToken(token) {
-  let user = JSON.parse(localStorage.getItem("user"));
-  user.access = token;
-  localStorage.setItem("user", JSON.stringify(user));
-};
-
-function getUser() {
-  return JSON.parse(localStorage.getItem("user"));
-};
-
-function setUser(user) {
-  console.log(JSON.stringify(user));
-  localStorage.setItem("user", JSON.stringify(user));
-};
-
-function removeUser() {
-  localStorage.removeItem("user");
-};
+function refreshToken(access) {
+  const updatedAuthToken = JSON.parse(localStorage.getItem("authTokens"));
+  updatedAuthToken.access = access;
+  localStorage.setItem("authTokens", JSON.stringify(updatedAuthToken));
+  localStorage.setItem("user", jwt_decode(access));
+}

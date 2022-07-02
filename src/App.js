@@ -16,6 +16,7 @@ import Sign from "./sign/sign";
 import MarketPlace from "./marketPlace/marketPlace";
 import AdminBasePage from "./admin/adminBasePage/adminBasePage";
 import ClientBasePage from "./client/clientBasePage/clientBasePage";
+import PaymentPage from "./payment/PaymentPage";
 
 function App({ store }) {
   const alert = useSelector((state) => state.alert);
@@ -104,6 +105,16 @@ function App({ store }) {
                 Component={<AdminBasePage type="/admin-token-list" />}
               />
             }
+          />
+          <Route
+            exact
+            path="/payment"
+            element={<PrivateRoute Component={<PaymentPage />} />}
+          />
+          <Route
+            exact
+            path="/register"
+            element={<PrivateRoute Component={<Register />} />}
           />
         </Routes>
       </div>

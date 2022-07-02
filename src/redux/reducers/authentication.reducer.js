@@ -3,9 +3,11 @@ import {
 } from '../constants/user.constants';
 
 let user = localStorage.getItem('user');
+let isAdmin = localStorage.getItem('isAdmin');
 const initialState = user ? {
   loggedIn: true,
-  user
+  user,
+  isAdmin
 } : {};
 export function authentication(state = initialState, action) {
 
@@ -18,7 +20,8 @@ export function authentication(state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-          user: action.curr
+          user: action.curr,
+          isAdmin: action.isAdmin
       };
     case userConstants.REFRESH_TOKEN__REQUEST:
       return {

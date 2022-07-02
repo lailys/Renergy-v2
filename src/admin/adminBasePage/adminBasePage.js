@@ -15,12 +15,7 @@ function AdminBasePage({ type }) {
     "/admin-generator-list": <AdminGeneratorList />,
     "/admin-token-list": <AdminTokenList />,
   };
-  return (
-    <div className="admin-base-page-container">
-      <AuthBackdrop />
-      {pagesMap[type]}
-    </div>
-  );
+  return <div className="admin-base-page-container"> {pagesMap[type]} </div>;
 }
 
 export default AdminBasePage;

@@ -51,9 +51,9 @@ function RegisterForm() {
           <TypeBox txt=" Buyer Of RECS" />
         </div>{" "}
       </div>{" "}
-      <div className="form-row-box">
+      {/* <div className="form-row-box">
         <FullLengthInput title="Company Name" length="85.5vh" />
-      </div>{" "}
+      </div>{" "} */}
       <div className="form-row-box">
         <FullLengthInput title="First Name" length="41vh" />
         <FullLengthInput title="Last Name" length="41vh" />
@@ -62,18 +62,17 @@ function RegisterForm() {
         <FullLengthInput title="Address" length="85.5vh" />
       </div>{" "}
       <div className="form-row-box">
-        <FullLengthInput title="Address2" length="85.5vh" />
+        <FullLengthInput title="Address 2" length="85.5vh" />
       </div>{" "}
       <div className="form-row-box">
         <FullLengthInput title="City" length="41vh" />
         <Dropdown title="State" type="state" length="22vh" />
         <FullLengthInput title="Zip" length="15vh" />
       </div>{" "}
+      {/* <div className="form-row-box">
+              <Dropdown title="Country" type="country" length="41vh" />
+            </div> */}{" "}
       <div className="form-row-box">
-        <Dropdown title="Country" type="country" length="41vh" />
-      </div>{" "}
-      <div className="form-row-box">
-        {" "}
         <FullLengthInput title="Email" length="85.5vh" />
       </div>{" "}
       <div className="form-row-box">
@@ -81,7 +80,6 @@ function RegisterForm() {
       </div>{" "}
       {context.userType === "client" ? (
         <div className="form-row-box">
-          {" "}
           <Button
             type="submit"
             fullWidth
@@ -111,7 +109,6 @@ function RegisterForm() {
         </div>
       ) : (
         <div className="form-row-box">
-          {" "}
           <Button
             type="submit"
             fullWidth

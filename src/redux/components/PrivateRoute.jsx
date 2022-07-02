@@ -12,7 +12,6 @@ function PrivateRoute({ Component }) {
     console.log("Context dose not exists- dashboard component -");
   }
   const user = context.user;
-  console.log(Component, "*****", user);
 
   return !user ? <Sign type="in" /> : Component;
 }

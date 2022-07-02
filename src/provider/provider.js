@@ -15,13 +15,13 @@ export const TbdContextProvider = TbdContext.Provider;
 export const TbdContextConsumer = TbdContext.Consumer;
 
 export const TbdContextComp = ({ children, store }) => {
-  console.log(
-    "5555>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>."
-  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const landing1Ref = useRef(null);
+
+  const [market, setMarket] = useState([]);
+
   const [signupForm, setSignupForm] = useState({});
   const [signinForm, setSigninForm] = useState({});
   const [authToken, setAuthToken] = useState(() =>
@@ -68,7 +68,6 @@ export const TbdContextComp = ({ children, store }) => {
   });
   store.subscribe(() => {
     const currState = store.getState().authentication;
-    console.log(currState, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^???");
     if (currState.loggedIn) {
       setUser(currState.user);
     } else {
@@ -103,7 +102,12 @@ export const TbdContextComp = ({ children, store }) => {
   const activateAccount = (e) => {
     console.log(window.location.href.split("/activate/")[1].split("/"));
     const keyList = window.location.href.split("/activate/")[1].split("/");
-    dispatch(userActions.activate({ uid: keyList[0], token: keyList[1] }));
+    dispatch(
+      userActions.activate({
+        uid: keyList[0],
+        token: keyList[1],
+      })
+    );
     navigate("/login");
   };
   const handleSignInForm = (e) => {
@@ -122,6 +126,10 @@ export const TbdContextComp = ({ children, store }) => {
   const handleSigOut = (e) => {
     e.preventDefault();
     dispatch(userActions.logout(signinForm));
+  };
+  const getToMarket = (e) => {
+    dispatch(userActions.getMarket());
+    navigate("/marketplace");
   };
   const handleScroll = (e) => {
     console.log(window.innerHeight, " window.pageYOffset", e.target.scrollTop);
@@ -197,6 +205,7 @@ export const TbdContextComp = ({ children, store }) => {
         openedTab,
         signupForm,
         dimensions,
+        getToMarket,
         landing1Ref,
         scrollPosition,
         landingPageFirstClicked,

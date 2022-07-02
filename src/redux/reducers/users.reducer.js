@@ -4,15 +4,15 @@ import {
 
 export function users(state = {}, action) {
   switch (action.type) {
-    case userConstants.GETALL_REQUEST:
+    case userConstants.TOKEN_LIST_REQUEST:
       return {
         loading: true
       };
-    case userConstants.GETALL_SUCCESS:
+    case userConstants.TOKEN_LIST_SUCCESS:
       return {
-        items: action.users
+        items: action.tokens
       };
-    case userConstants.GETALL_FAILURE:
+    case userConstants.TOKEN_LIST_FAILURE:
       return {
         error: action.error
       };

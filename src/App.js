@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Routes, Route, Router } from "react-router-dom";
 import { TbdContextComp } from "./provider/provider";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,16 +60,21 @@ function App({ store }) {
             path="/admin-profile"
             element={<PrivateRoute Component={<Register />} />}
           />
-          <Route
-            exact
-            path="/user-dashboard"
-            // element={<ClientBasePage type="/user-dashboard" />}
-            element={
-              <PrivateRoute
-                Component={<ClientBasePage type="/user-dashboard" />}
-              />
-            }
-          />
+          {["generator", "recs", "orders", "transaction"].map((each, index) => (
+            <Route
+              key={index + each}
+              exact
+              path={`/user-dashboard/${each}`}
+              // element={<ClientBasePage type="/user-dashboard" />}
+              element={
+                <PrivateRoute
+                  Component={
+                    <ClientBasePage type={`/user-dashboard/${each}`} />
+                  }
+                />
+              }
+            />
+          ))}
           <Route
             exact
             path="/admin-dashboard"

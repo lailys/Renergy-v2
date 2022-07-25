@@ -1,16 +1,66 @@
+import { useContext, useEffect } from "react";
+import { TbdContext } from "../provider/provider";
+import { useSelector } from "react-redux";
+
+import FullLengthInput from "../form/fullLengthInput";
+import TimePicker from "../form/timePicker";
+
 import MarketplaceList from "../admin/list/marketplaceList";
-
-import "./marketplace.css";
-
 import Dropdown from "../form/dropdown";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import "./marketplace.css";
+
 function MarketPlace() {
+  const context = useContext(TbdContext);
+  if (!context) {
+    console.log("Context dose not exists- dashboard component -");
+  }
+  useEffect(() => {
+    context.getMarket();
+  }, [context.filterChanged]);
+  const filter = [
+    <Dropdown
+      title="Generator Type"
+      type="generatorType"
+      length="9.5vw"
+      object="gen"
+      fn={context.getMarketParam}
+    />,
+    <Dropdown
+      title="Certifying Body"
+      type="certifyingBody"
+      length="9.5vw"
+      object="gen"
+      fn={context.getMarketParam}
+    />,
+    <Dropdown
+      title="state"
+      type="state"
+      length="5.5vw"
+      object="gen"
+      fn={context.getMarketParam}
+    />,
+    <TimePicker />,
+    <FullLengthInput
+      title="Quantity"
+      length="7vw"
+      object="gen"
+      type="number"
+      param="qty"
+      fn={context.getMarketParam}
+    />,
+    <Dropdown
+      title="Order Side"
+      type="side"
+      length="7vw"
+      object="gen"
+      fn={context.getMarketParam}
+    />,
+  ];
   return (
     <div className="marketplace-page-container">
-      {/* <AuthBackdrop /> */}
       <Box
         sx={{
           // border: "solid 1px red",
@@ -64,57 +114,11 @@ function MarketPlace() {
               Filter by:
             </Typography>
           </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Generator Type"
-              type="generatorType"
-              length="9.5vw"
-              object="gen"
-            />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Certifying Body"
-              type="generatorType"
-              length="9.5vw"
-              object="gen"
-            />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown title="state" type="state" length="5.5vw" object="gen" />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Vintage date start range"
-              type="generatorType"
-              length="13vw"
-              object="gen"
-            />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Vintage date end range"
-              type="generatorType"
-              length="13vw"
-              object="gen"
-            />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Quantity"
-              type="generatorType"
-              length="7vw"
-              object="gen"
-            />
-          </div>
-          <div className="filter-row-box ">
-            <Dropdown
-              title="Order Type"
-              type="orderType"
-              length="7vw"
-              object="gen"
-            />
-          </div>
+          {filter.map((ele, inx) => (
+            <div className="filter-row-box " key={inx}>
+              {ele}
+            </div>
+          ))}
         </Box>
 
         <MarketplaceList />

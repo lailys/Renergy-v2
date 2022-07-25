@@ -51,14 +51,14 @@ export default function CheckoutForm() {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
     setIsLoading(true);
 
     const { error } = await stripe.confirmPayment({
       elements,
+      redirect: "if_required",
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        // return_url: "http://127.0.0.1:3000/funds/payment-success/",
       },
     });
 
@@ -81,11 +81,18 @@ export default function CheckoutForm() {
       <PaymentElement id="payment-element" />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+          {" "}
+          {isLoading ? (
+            <div className="spinner" id="spinner">
+              {" "}
+            </div>
+          ) : (
+            "Pay now"
+          )}{" "}
+        </span>{" "}
+      </button>{" "}
+      {/* Show any error or success messages */}{" "}
+      {message && <div id="payment-message"> {message} </div>}{" "}
     </form>
   );
 }

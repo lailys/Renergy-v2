@@ -1,7 +1,6 @@
 .dashboard-page-container {
   margin: 0;
   padding: 0;
-  /* background: yellow; */
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -20,4 +19,30 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+.MuiTablePagination-actions {
+  /* border: solid red 1px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+.MuiTableCell-head {
+  /* -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); */
+}
+.add-fund-btn {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.2) 0px 1px 3px -1px;
+  border-radius: 50%;
+  width: 6vh;
+  height: 6vh;
+}
+.add-fund-btn:hover {
+  background: var(--color_c-clear);
 }

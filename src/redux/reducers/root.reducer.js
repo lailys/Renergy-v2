@@ -9,7 +9,7 @@ import {
   registration
 } from './registration.reducer';
 import {
-  users
+  user
 } from './users.reducer';
 import {
   alert
@@ -18,7 +18,7 @@ import {
 const rootReducer = combineReducers({
   authentication,
   registration,
-  users,
+  user,
   alert
 });
 

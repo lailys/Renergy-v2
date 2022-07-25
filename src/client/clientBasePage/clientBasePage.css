@@ -25,6 +25,7 @@
 .client-base-page-container {
   /* border: #f56acf solid 1px; */
   /* color: #fffffff9; */
+  /* background: #d3d2d2f9; */
   background: white;
   display: flex;
   flex-direction: column;

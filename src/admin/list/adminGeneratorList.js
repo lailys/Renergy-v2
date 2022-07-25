@@ -88,7 +88,7 @@ function AdminGeneratorList() {
         position: "absolute",
         top: "25vh",
         left: "15vw",
-        // border: "solid red 1px",
+        // border: "solid blue 1px",
       }}
     >
       <TableContainer sx={{ height: "92%" }}>

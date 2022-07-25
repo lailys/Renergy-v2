@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
+
+import { marketMap } from "../../maps/dashboardMap";
+
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,12 +15,12 @@ import Button from "@mui/material/Button";
 
 const columns = [
   ["", "button", 30],
-  ["Current Price", "price", 30],
-  ["Vintage Date", "date", 30],
-  ["Quantity", "quantity", 30],
-  ["State", "state", 30],
-  ["Certifying Body", "body", 30],
-  ["Generator Type", "type", 30],
+  ["Current Price", "current_price", 30],
+  ["Vintage Date", "vintage_date_for_ui", 30],
+  ["Quantity", "qty", 30],
+  ["States", "states_for_ui", 30],
+  ["Certifying Bodies", "certifying_bodies_for_ui", 30],
+  ["Order Type", "order_type", 30],
   ["ID", "id", 30],
 ].reduceRight((next, key) => {
   return [
@@ -28,16 +32,18 @@ const columns = [
     },
   ];
 }, []);
-
-function createData(type, body, state, quantity, date, price, button) {
-  return { type, body, state, quantity, date, price, button };
-}
-
-const rows = [createData("India", "IN", 1324171354, 3287263)];
-
+const getValue = (row, id) => {
+  if (id === "order_type" || id === "certifying_bodies_for_ui") {
+    return marketMap[id][row[id]];
+  } else {
+    return row[id];
+  }
+};
 function MarketplaceList() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const data = useSelector((state) => state.user.data);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,7 +53,6 @@ function MarketplaceList() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   return (
     <Paper
       style={{
@@ -74,8 +79,8 @@ function MarketplaceList() {
                     minWidth: column.minWidth,
                     fontWeight: "500",
                     fontSize: "1rem",
-                    // color: "var(--color_four)",
                     color: "var(--color_c)",
+                    textAlign: "center",
                   }}
                 >
                   {column.label}
@@ -84,63 +89,77 @@ function MarketplaceList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => {
-                return (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={index + "row"}
-                  >
-                    {columns.slice(0, 7).map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ color: "var(--color_four)" }}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                    <TableCell
-                      key={columns.button}
-                      // align={column.align}
-                      style={{ color: "var(--color_f)" }}
+            {data &&
+              Array.isArray(data.data) &&
+              data.data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={index + "row"}
                     >
-                      <Button
-                        id="add-more-btn"
-                        fullWidth
-                        style={{
-                          background: "var(--color_d)",
-                          width: "30%",
-                          height: "3vh",
-                        }}
-                        variant="contained"
+                      {columns.slice(0, 7).map((column) => {
+                        const value = getValue(row, column.id);
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{
+                              color: "var(--color_four)",
+                              textAlign: "center",
+                            }}
+                          >
+                            {column.format && typeof value === "number"
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      })}
+                      <TableCell
+                        key={columns.button}
+                        style={{ color: "var(--color_f)", textAlign: "center" }}
                       >
-                        buy
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                        <Button
+                          id="add-more-btn"
+                          fullWidth
+                          style={{
+                            background: "var(--color_d)",
+                            width: "30%",
+                            height: "3vh",
+                          }}
+                          variant="contained"
+                        >
+                          {row.side === "B" ? "SELL" : "BUY"}
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={data && Array.isArray(data.data) ? data.data.length : 0}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        style={{ color: "var(--color_e)" }}
+        style={{
+          padding: "0 1vw",
+          color: "var(--color_e)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          marginBottom: "4vh",
+          width: "calc(100% - 4vw)",
+          overflow: "hidden",
+          boxShadow: "0px -4px 3px rgba(50, 50, 50, 0.02)",
+        }}
       />
     </Paper>
   );

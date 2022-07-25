@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useReducer } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authentication } from "../redux/reducers/authentication.reducer";
 
 import axios from "axios";
@@ -20,8 +20,17 @@ export const TbdContextComp = ({ children, store }) => {
 
   const landing1Ref = useRef(null);
 
+  const [dashboardData, setDashboardData] = useState([]);
+  const [filterChanged, setFilterChanged] = useState(false);
+  const [marketParam, setMarketParam] = useState({
+    side: "",
+    owner: "",
+    qty: "",
+    certifying_bodies_for_ui: "",
+    vintage_dt_min: "",
+  });
+  // const [marketParam, setMarketParam] = useState("?owner=ME");
   const [market, setMarket] = useState([]);
-
   const [signupForm, setSignupForm] = useState({});
   const [signinForm, setSigninForm] = useState({});
   const [authToken, setAuthToken] = useState(() =>
@@ -32,6 +41,7 @@ export const TbdContextComp = ({ children, store }) => {
   const [user, setUser] = useState(() =>
     localStorage.getItem("user") ? localStorage.getItem("user") : null
   );
+  const [activeGenerator, setAxctiveGenerator] = useState("generator");
   const [userType, setUserType] = useState("client");
   const [landingPageFirstClicked, setLandingPageFirstClicked] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -67,9 +77,11 @@ export const TbdContextComp = ({ children, store }) => {
     blobArrowOpacity: "0",
   });
   store.subscribe(() => {
+    const stateMap = store.getState();
     const currState = store.getState().authentication;
     if (currState.loggedIn) {
       setUser(currState.user);
+      // setLandingPageFirstClicked(currState.users.generators);
     } else {
       setUser(null);
       setLoading(false);
@@ -121,18 +133,45 @@ export const TbdContextComp = ({ children, store }) => {
     e.preventDefault();
     if (signinForm.email && signinForm.password) {
       dispatch(userActions.login(signinForm));
+      navigate("/");
     }
   };
   const handleSigOut = (e) => {
     e.preventDefault();
     dispatch(userActions.logout(signinForm));
   };
-  const getToMarket = (e) => {
-    dispatch(userActions.getMarket());
+  const getDashboard = (url, clickedFolder) => {
+    dispatch(userActions.getDashboard(url, clickedFolder));
+  };
+  const getMarket = (e) => {
+    const param = createParam();
+    dispatch(userActions.getMarket(param));
     navigate("/marketplace");
   };
+  const getMarketParam = (param, type) => {
+    setFilterChanged((prev) => !prev);
+    const curr = marketParam;
+    curr[type] = param;
+    setMarketParam(curr);
+  };
+  const createParam = () => {
+    let str = "";
+    const list = Object.keys(marketParam);
+    console.log(list, 2, "????????????????/", !marketParam["qty"]);
+    for (let i = 0; i < list.length; i++) {
+      console.log(list[i], "????????????????/", marketParam[list[i]]);
+      // for (let p in marketParam) {
+      if (marketParam[list[i]] !== "") {
+        if (str[0] !== "?") {
+          str += "?" + list[i] + "=" + marketParam[list[i]];
+        } else {
+          str += "&" + list[i] + "=" + marketParam[list[i]];
+        }
+      }
+    }
+    return str;
+  };
   const handleScroll = (e) => {
-    console.log(window.innerHeight, " window.pageYOffset", e.target.scrollTop);
     const position = window.pageYOffset;
     if (e.target.scrollTop < 1800) {
       const nextDimention = {
@@ -205,24 +244,30 @@ export const TbdContextComp = ({ children, store }) => {
         openedTab,
         signupForm,
         dimensions,
-        getToMarket,
+        filterChanged,
         landing1Ref,
+        dashboardData,
         scrollPosition,
+        activeGenerator,
         landingPageFirstClicked,
-
         setNewRec,
+        getMarket,
         setUserType,
-        handleScroll,
-        setOpenedTab,
-        setDimensions,
-        catchFirstClick,
-        activateAccount,
         handleSigIn,
         handleSignUp,
+        handleScroll,
+        setOpenedTab,
+        handleSigOut,
+        getDashboard,
+        setDimensions,
+        getMarketParam,
+        catchFirstClick,
+        activateAccount,
+        setDashboardData,
         handleSignInForm,
         handleSignUpForm,
-        handleSigOut,
         setScrollPosition,
+        setAxctiveGenerator,
         setLandingPageFirstClicked,
       }}
     >

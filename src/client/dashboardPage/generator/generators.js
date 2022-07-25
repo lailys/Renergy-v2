@@ -1,143 +1,180 @@
-import React from "react";
+import { useState } from "react";
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
-function Generators({ tab, setTab }) {
-  const title = [
-    "name",
-    "state",
-    "Type",
-    "Nameplate Rating",
-    "Ceritifying Body",
-    "Place In Service",
-    "DecomissionDate",
-  ];
+import { generatorMap } from "../../../maps/dashboardMap";
+
+function Generators({ setTab, data }) {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  const columns = [
+    ["Decomission Date", "decomissioned_dt", 2],
+    ["Place In Service", "service_start_dt", 2],
+    ["Ceritifying Body", "certifying_body", 2],
+    ["Nameplate Rating", "nameplate_rating", 2],
+    ["Type", "generator_type", 1],
+    ["State", "state", 1],
+    ["Name", "generator_name", 8],
+  ].reduceRight((next, key) => {
+    return [
+      ...next,
+      {
+        id: key[1],
+        label: key[0],
+        minWidth: key[2],
+      },
+    ];
+  }, []);
+  const getValue = (row, id) => {
+    if (id === "generator_type" || id === "certifying_body") {
+      return generatorMap[row[id]];
+    } else {
+      return row[id];
+    }
+  };
+
   return (
     <Box
       style={{
-        // border: "solid green 1px",
+        border: "solid var(--color_c) 1px ",
         background: "white",
-        padding: "1vh",
-        margin: "10vh 0 2.5vh 2vh",
-        display: "grid",
-        gridTemplateColumns: "1fr 2fr 2fr 2fr 2fr 2fr",
-        gridTemplateRows: "1fr 1fr 1fr 1fr 2fr",
-        gap: "1vmin",
-        boxShadow: "rgba(0, 0, 0, 0.12) 1px 5px 5px 4px",
-        borderRadius: "10px",
-        height: "17vh",
-        width: "calc(94% - 2vh)",
+        padding: "2vh",
+        margin: "0",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        position: "relative",
+        top: "0",
+        boxShadow: "rgba(0, 0, 0, 0.1) 1px 5px 5px 4px",
+        borderRadius: "0 0 10px 10px",
+        height: "70%",
+        width: "calc(100% - 4vh)",
       }}
     >
-      <Grid
-        container
+      <Paper
         style={{
-          color: "var(--color_c)",
-          gridColumnStart: "1",
-          gridColumnEnd: "9",
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "1.8vmin",
-          fontWeight: "600",
+          background: "#fffffff9",
+          zIndex: "10",
+          position: "absolute",
+          top: "0",
+          border: "solid var(--color_c)  1px",
+          height: "100%",
+          width: "calc(100% )",
         }}
       >
-        Generator{" "}
-      </Grid>{" "}
-      {title.map((t, i) => (
-        <div
-          key={i}
+        <TableContainer sx={{ height: "87%" }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column, f) => (
+                  <TableCell
+                    key={f + "headcell"}
+                    align={column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      fontWeight: "500",
+                      fontSize: "1rem",
+                      color: "var(--color_c)",
+                      textAlign: "center",
+                    }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.data &&
+                data.data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, i) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={i + "tablerow"}
+                      >
+                        {columns.map((column, j) => {
+                          const value = getValue(row, column.id);
+                          return (
+                            <TableCell
+                              key={j + "tablecell"}
+                              align={column.align}
+                              style={{
+                                color: "var(--color_f)",
+                                textAlign: "center",
+                              }}
+                            >
+                              {column.format && typeof value === "number"
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={data.data ? data.data.length : 0}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
           style={{
-            color: "var(--color_h-clear)",
+            padding: "0 1vw",
+            color: "var(--color_e)",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "1.6vmin",
-            fontWeight: "400",
+            justifyContent: "flex-end",
+            marginBottom: "4vh",
+            width: "calc(100% - 4vw)",
+            overflow: "hidden",
+            boxShadow: "0px -4px 3px rgba(50, 50, 50, 0.02)",
           }}
-        >
-          {t}{" "}
-        </div>
-      ))}{" "}
-      <div
+        />
+      </Paper>
+      <Button
+        variant="contained"
         style={{
-          color: "grey",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          cursor: "pointer",
+          background: "var(--color_c)",
           fontFamily: "Roboto, sans-serif",
           fontSize: "1.6vmin",
-          fontWeight: "400",
+          fontWeight: "500",
+          position: "absolute",
+          bottom: "-10vh",
+          right: "0",
+          width: "20%",
+          height: "4.5vh",
         }}
-      ></div>{" "}
-      {title.map((t, i) => (
-        <div
-          key={i}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "1.6vmin",
-            fontWeight: "300",
-          }}
-        >
-          {i}{" "}
-        </div>
-      ))}{" "}
-      <div
-        style={{
-          color: "grey",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "1.6vmin",
-          fontWeight: "400",
-        }}
-      ></div>{" "}
-      {title.map((t, i) => (
-        <div
-          key={i}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "1.6vmin",
-            fontWeight: "300",
-          }}
-        >
-          {i}{" "}
-        </div>
-      ))}{" "}
-      <div
-        style={{
-          // background: "grey",
-          gridColumnStart: "1",
-          gridColumnEnd: "9",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          fontFamily: "Roboto, sans-serif",
-          fontSize: "1.6vmin",
-          fontWeight: "400",
-        }}
+        onClick={(e) => setTab("add-generator")}
       >
-        <Button
-          variant="contained"
-          style={{
-            background: "var(--color_c-clear)",
-            width: "18%",
-            height: "3.5vh",
-            marginRight: "1vh",
-          }}
-          onClick={(e) => setTab("add-generator")}
-        >
-          List A Generator{" "}
-        </Button>{" "}
-      </div>{" "}
+        List A Generator
+      </Button>
     </Box>
   );
 }

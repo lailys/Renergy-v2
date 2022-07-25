@@ -1,60 +1,76 @@
-import React from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { TbdContext } from "../../../provider/provider";
 
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import NavItem from "./navItem";
+import "./dashboardNav.css";
 
 function DashboardNav() {
+  const context = useContext(TbdContext);
+  if (!context) {
+    console.log("Context dose not exists- dashboard component -");
+  }
+  const navigate = useNavigate();
+
+  const activeFolder = (e) => {
+    const urlMap = {
+      transaction: "/order/transaction",
+      orders: "/order/search?owner=ME",
+      recs: "/rec-token/list/",
+      generator: "/generator-asset/",
+    };
+    const clickedFolder = e.target.getAttribute("data-title");
+    context.setAxctiveGenerator(clickedFolder);
+    navigate(`/user-dashboard/${clickedFolder}`);
+  };
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "repeat(7, 1fr)",
-        gridTemplateRows: "repeat(4, 1fr)",
-        gridTemplateAreas: `". a a a a a ." 
-        ". b b b b b ."
-        ". c c c  c c ."`,
-        width: "100%",
-        height: "92vh",
-      }}
-    >
-      <Box
-        sx={{
-          gridArea: "a",
-        }}
+    <div className="dashboard-nav-container" onClick={activeFolder}>
+      <div
+        className="dashboard-nav-container-item"
+        data-title="transaction"
+        id={
+          context.activeGenerator === "transaction"
+            ? "dashboard-nav-container-item-activated"
+            : ""
+        }
       >
-        {" "}
-      </Box>{" "}
-      <Box
-        sx={{
-          gridArea: "b",
-        }}
+        Transactions
+      </div>
+
+      <div
+        className="dashboard-nav-container-item"
+        data-title="orders"
+        id={
+          context.activeGenerator === "orders"
+            ? "dashboard-nav-container-item-activated"
+            : ""
+        }
       >
-        <Grid
-          container
-          // spacing={2}
-          style={{
-            background: "var(--color_c)",
-            // border: "solid yellow 1px",
-            height: "100%",
-            width: "100%",
-            padding: "0",
-            margin: "0",
-          }}
-        >
-          <NavItem text="Generators" /> <NavItem text="Recs" />
-          <NavItem text="Transactions" />
-          <NavItem text="Auctions" />
-        </Grid>{" "}
-      </Box>{" "}
-      <Box
-        sx={{
-          gridArea: "c",
-        }}
+        Orders
+      </div>
+      <div
+        className="dashboard-nav-container-item"
+        data-title="recs"
+        id={
+          context.activeGenerator === "recs"
+            ? "dashboard-nav-container-item-activated"
+            : ""
+        }
       >
-        {" "}
-      </Box>{" "}
-    </Box>
+        Recs
+      </div>
+      <div
+        className="dashboard-nav-container-item"
+        data-title="generator"
+        id={
+          context.activeGenerator === "generator"
+            ? "dashboard-nav-container-item-activated"
+            : ""
+        }
+        // id="dashboard-nav-container-item-activated"
+      >
+        Generator
+      </div>
+    </div>
   );
 }
 

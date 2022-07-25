@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 
 import Button from "@mui/material/Button";
-import AuthBackdrop from "../../general/authBackdrop";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -26,8 +25,6 @@ function Dashboard() {
   };
 
   return (
-    // <div className="dashboard-page-container">
-
     <div className="dashboard-page-container-form">
       {btnList.map((title, index) => (
         <Button
@@ -40,7 +37,6 @@ function Dashboard() {
         </Button>
       ))}
     </div>
-    // </div>
   );
 }
 

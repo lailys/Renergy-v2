@@ -20,8 +20,7 @@ export const userActions = {
   activate,
   refreshToken,
   getMarket,
-  //   getAll,
-  //   delete: _delete
+  getDashboard,
 };
 
 
@@ -216,69 +215,73 @@ function refreshToken(access) {
   }
 }
 
-function getMarket() {
+function getMarket(param) {
   return dispatch => {
     dispatch(request());
-    userService.getMarket()
+    userService.getMarket(param)
       .then(
-        tokens => dispatch(success(tokens)),
+        response => dispatch(success(response)),
         error => dispatch(failure(error.toString()))
       );
   };
 
   function request() {
     return {
-      type: userConstants.TOKEN_LIST_REQUEST
+      type: userConstants.MARKET_REQUEST,
+      data: [],
     }
   }
 
-  function success(tokens) {
+  function success(data) {
     return {
-      type: userConstants.TOKEN_LIST_SUCCESS,
-      tokens
+      type: userConstants.MARKET_SUCCESS,
+      data,
     }
   }
 
   function failure(error) {
     return {
-      type: userConstants.TOKEN_LIST_FAILURE,
-      tokens: [],
+      type: userConstants.MARKET_FAILURE,
+      data: [],
       error
     }
   }
 }
 
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//   return dispatch => {
-//     dispatch(request(id));
+function getDashboard(url, folder) {
+  return dispatch => {
+    dispatch(request(folder));
+    userService.getDashboard(url)
+      .then(
+        response => dispatch(success(response.data, url)),
+        error => dispatch(failure(error.toString()))
+      );
 
-//     userService.delete(id)
-//       .then(
-//         user => dispatch(success(id)),
-//         error => dispatch(failure(id, error.toString()))
-//       );
-//   };
+  }
 
-//   function request(id) {
-//     return {
-//       type: userConstants.DELETE_REQUEST,
-//       id
-//     }
-//   }
 
-//   function success(id) {
-//     return {
-//       type: userConstants.DELETE_SUCCESS,
-//       id
-//     }
-//   }
+  function request(folder) {
+    return {
+      type: userConstants.DASHBOARD_REQUEST,
+      data: [],
+      folder,
+    }
+  }
 
-//   function failure(id, error) {
-//     return {
-//       type: userConstants.DELETE_FAILURE,
-//       id,
-//       error
-//     }
-//   }
-// }
+  function success(data, folder) {
+    return {
+      type: userConstants.DASHBOARD_SUCCESS,
+      data: data,
+      folder,
+    }
+  }
+
+  function failure(folder, error) {
+    return {
+      type: userConstants.DASHBOARD_FAILURE,
+      data: [],
+      folder,
+      error
+    }
+  }
+}

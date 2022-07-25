@@ -91,7 +91,6 @@ function First() {
         <div
           className="landing-page-container-a-blob-text-a"
           style={{
-            // border: "solid red 1px",
             top: context.dimensions.blobTextATop,
             left: context.dimensions.blobTextALeft,
             fontSize: context.dimensions.blobTextAFontSize,

@@ -69,14 +69,13 @@
     rgba(255, 255, 255, 1)
   );
   position: absolute;
-  left: 0px;
-  /* left: 70px; */
+  left: 81.5px;
   bottom: 80px;
   transition: all 1s ease-in;
   -webkit-transition: all 1s ease-in;
   /* width: 1500px; */
   width: calc(100vw - 280px);
-  height: 870px;
+  height: calc(100vh - 240px);
 }
 .landing-page-container-a-img-fade-1 {
   /* border: solid 1px blue; */
@@ -122,10 +121,10 @@
   /* border: solid 1px red; */
   cursor: pointer;
   position: absolute;
-  left: 40px;
+  left: 1.5vw;
   top: 34px;
-  width: 120px;
-  height: 85px;
+  width: 6vw;
+  height: 4vw;
 }
 #logo-white {
   z-index: 1000;

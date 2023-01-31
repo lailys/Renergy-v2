@@ -1,27 +1,72 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authentication } from "../redux/reducers/authentication.reducer";
-
+import { url } from "../utils/map";
+import { getInstance } from "../utils/axiosInctance";
+import { getCorrectDataMap, dashboardUrlMap } from "../utils/map";
 import axios from "axios";
-
 import jwt_decode from "jwt-decode";
-
-import { userActions } from "../redux/actions/user.actions";
+import { useEffect } from "react";
 
 export const TbdContext = React.createContext();
 
 export const TbdContextProvider = TbdContext.Provider;
 export const TbdContextConsumer = TbdContext.Consumer;
 
-export const TbdContextComp = ({ children, store }) => {
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+
+export const TbdContextComp = ({ children }) => {
+  const pageMap = {
+    "/": "home-btn",
+    "/home": "home-btn",
+    "/signin": "authentication-in-btn",
+    "/signup": "authentication-up-btn",
+    "/register": "registration-btn",
+    "/stripe-payment-add": "stripe-payment-page-add",
+    "/stripe-payment-withdraw": "stripe-payment-page-withdraw",
+  };
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const instance = getInstance();
+  const blurBackDropRef = useRef(null);
 
-  const landing1Ref = useRef(null);
-
-  const [dashboardData, setDashboardData] = useState([]);
+  const [error, setError] = useState("");
+  const [paymentMessage, setPaymentMessage] = useState("");
+  const [backdropRotation, setBackdropRotation] = useState(28);
+  const [amount, setAmount] = useState(0);
+  const [popupId, setPopupId] = useState("");
+  const [recId, setRecId] = useState(null);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [isSideSet, setIsSideSet] = useState(false);
+  const [dashboardList, setDashboardList] = useState([]);
+  const [availableGens, setAvailableGens] = useState([]);
   const [filterChanged, setFilterChanged] = useState(false);
+  const [dashboardTableUpdate, setDashboardTableUpdate] = useState(false);
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+  const [draftedOrder, setDraftedOrder] = useState({
+    side: null,
+    form: null,
+  });
+  const [dashboardFolder, setDashboardFolder] = useState(
+    window.location.pathname.split("/dashboard/")[1] || "generator"
+  );
+  const [marketplaceRowsCount, setMarketplaceRowsCount] = useState(0);
+  const [dashboardRowsCount, setDashboardRowsCount] = useState([
+    "generator",
+    0,
+  ]);
+  const [currentPage, setCurrentPage] = useState(
+    pageMap[window.location.pathname]
+  );
+  const [userLogedin, setUserLogedin] = useState(
+    localStorage.getItem("user") ? localStorage.getItem("user") : null
+  );
   const [marketParam, setMarketParam] = useState({
     side: "",
     owner: "",
@@ -29,249 +74,449 @@ export const TbdContextComp = ({ children, store }) => {
     certifying_bodies_for_ui: "",
     vintage_dt_min: "",
   });
-  // const [marketParam, setMarketParam] = useState("?owner=ME");
-  const [market, setMarket] = useState([]);
-  const [signupForm, setSignupForm] = useState({});
-  const [signinForm, setSigninForm] = useState({});
-  const [authToken, setAuthToken] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
-  const [user, setUser] = useState(() =>
-    localStorage.getItem("user") ? localStorage.getItem("user") : null
-  );
-  const [activeGenerator, setAxctiveGenerator] = useState("generator");
-  const [userType, setUserType] = useState("client");
-  const [landingPageFirstClicked, setLandingPageFirstClicked] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [openedTab, setOpenedTab] = useState("");
-  let [loading, setLoading] = useState(true);
-  const [errMsg, setErrMsg] = useState("");
-  const [newRec, setNewRec] = useState({});
-  const [dimensions, setDimensions] = useState({
-    border: "solid red 1px",
-    left: "0px",
-    bottom: "0vh",
-    // width: "1678px",
-    width: "100vw",
-    height: "100vh",
-    borderRadius: "0px",
-    blobAW: "20px",
-    blobAH: "20px",
-    blobABottom: "10px",
-    blobAPosition: "fixed",
-    blobARadius: "100px 5px 5px 5px",
-    blobTextBOpacity: "0",
-    blobTextAFontSize: "6rem",
-    blobTextADivColor: "white",
-    blobTextASpanColor: "white",
-    blobTextATop: "50%",
-    blobTextALeft: "calc(50vw - 300px)",
-    blobTextBTop: "43%",
-    blobTextBLeft: "32.5%",
-    blobTextBColor: "white",
-    blobArrowTop: "68%",
-    blobArrowLeft: "40vw",
-    blobArrowColor: "white",
-    blobArrowOpacity: "0",
-  });
-  store.subscribe(() => {
-    const stateMap = store.getState();
-    const currState = store.getState().authentication;
-    if (currState.loggedIn) {
-      setUser(currState.user);
-      // setLandingPageFirstClicked(currState.users.generators);
-    } else {
-      setUser(null);
-      setLoading(false);
-    }
-  });
   useEffect(() => {
-    setLoading(user ? true : false);
-  }, [user]);
-  const handleSignUpForm = (e) => {
-    const { id, value } = e.target;
-    setSignupForm((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-  const handleSignUp = (e) => {
-    e.preventDefault();
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     if (
-      signupForm.username &&
-      signupForm.first_name &&
-      signupForm.last_name &&
-      signupForm.email &&
-      signupForm.password &&
-      signupForm.re_password &&
-      signupForm.password === signupForm.re_password
+      (window.location.pathname === "/dashboard" ||
+        window.location.pathname === "/marketplace") &&
+      !userLogedin
+    )
+      navigate("/signin");
+  });
+  const PageNavigation = (e) => {
+    if (
+      e.target.classList.contains("link") &&
+      currentPage !== pageMap[window.location.pathname] &&
+      blurBackDropRef.current
     ) {
-      dispatch(userActions.register(signupForm));
+      const rotation = backdropRotation === 28 ? -68 : 28;
+      blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
+      setBackdropRotation(rotation);
+    }
+    setDashboardFolder("generator");
+    setCurrentPage(pageMap[window.location.pathname]);
+  };
+  const rotateBackdrop = (page) => {
+    navigate(page);
+    if (blurBackDropRef.current) {
+      const rotation = backdropRotation === 28 ? -67 : 28;
+      blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
+      setBackdropRotation(rotation);
+      setCurrentPage(pageMap[page]);
     }
   };
-  const activateAccount = (e) => {
-    console.log(window.location.href.split("/activate/")[1].split("/"));
-    const keyList = window.location.href.split("/activate/")[1].split("/");
-    dispatch(
-      userActions.activate({
-        uid: keyList[0],
-        token: keyList[1],
+
+  function login(e, user) {
+    e.preventDefault();
+    var config = {
+      method: "post",
+      url: url + "api/token/",
+      headers: {},
+      data: user,
+    };
+
+    return axios(config)
+      .then((response) => {
+        const currUser = jwt_decode(response.data.access);
+        localStorage.setItem("authTokens", JSON.stringify(response.data));
+        localStorage.setItem("user", currUser);
+        localStorage.setItem("isAdmin", response.data.is_superuser);
+        setUserLogedin(currUser);
+        rotateBackdrop("/home");
+        setError("");
+        return response;
       })
-    );
-    navigate("/login");
+      .catch(handleError);
+  }
+  const logout = (e) => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("authTokens");
+    setPopupId("");
+    setError("");
+    setUserLogedin(null);
+    rotateBackdrop("/home");
+    navigate("/home");
   };
-  const handleSignInForm = (e) => {
-    const { id, value } = e.target;
-    setSigninForm((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-  const handleSigIn = (e) => {
-    e.preventDefault();
-    if (signinForm.email && signinForm.password) {
-      dispatch(userActions.login(signinForm));
-      navigate("/");
+  const handleError = (err) => {
+    let error = [];
+    if (err.response) {
+      console.log(err.response);
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+      error = [err.response.status];
+      for (let i in err.response.data) {
+        error.push(err.response.data[i]);
+      }
+    } else if (err.request) {
+      error = ["Unknown error has been occured"];
+    } else {
+      error = [err.message];
     }
+
+    setError(error.join(" "));
+    return Promise.reject(error.join(" "));
   };
-  const handleSigOut = (e) => {
-    e.preventDefault();
-    dispatch(userActions.logout(signinForm));
-  };
-  const getDashboard = (url, clickedFolder) => {
-    dispatch(userActions.getDashboard(url, clickedFolder));
-  };
-  const getMarket = (e) => {
-    const param = createParam();
-    dispatch(userActions.getMarket(param));
-    navigate("/marketplace");
-  };
-  const getMarketParam = (param, type) => {
+  const getMarketFilterParam = (param) => {
     setFilterChanged((prev) => !prev);
+    const paramList = param.split(",");
     const curr = marketParam;
-    curr[type] = param;
+    curr[paramList[2]] = paramList[2] !== " " ? paramList[1] : "";
     setMarketParam(curr);
   };
   const createParam = () => {
-    let str = "";
+    let str = "?is_active=True";
     const list = Object.keys(marketParam);
-    console.log(list, 2, "????????????????/", !marketParam["qty"]);
     for (let i = 0; i < list.length; i++) {
-      console.log(list[i], "????????????????/", marketParam[list[i]]);
-      // for (let p in marketParam) {
-      if (marketParam[list[i]] !== "") {
-        if (str[0] !== "?") {
-          str += "?" + list[i] + "=" + marketParam[list[i]];
-        } else {
-          str += "&" + list[i] + "=" + marketParam[list[i]];
-        }
-      }
+      if (list[i] === "side")
+        marketParam[list[i]] === "" || marketParam[list[i]] === "ALL"
+          ? setIsSideSet(false)
+          : setIsSideSet(true);
+      if (marketParam[list[i]] === "") continue;
+      str += "&" + list[i] + "=" + marketParam[list[i]];
     }
     return str;
   };
-  const handleScroll = (e) => {
-    const position = window.pageYOffset;
-    if (e.target.scrollTop < 1800) {
-      const nextDimention = {
-        ...dimensions,
-        blobAPosition: "fixed",
-        blobABottom: "10px",
-        blobARadius: "100px 5px 5px 5px",
-      };
-      setDimensions(nextDimention);
-    }
-    if (e.target.scrollTop >= 1800 && e.target.scrollTop < 1900) {
-      const nextDimention = {
-        ...dimensions,
-        blobAPosition: "fixed",
-        blobABottom: "10px",
-        blobARadius: "5px 5px 100px 5px",
-      };
-      setDimensions(nextDimention);
-    }
-    if (e.target.scrollTop >= 1900) {
-      const nextDimention = {
-        ...dimensions,
-        blobAPosition: "fixed",
-        blobABottom: "200px",
-        blobARadius: "5px 5px 100px 5px",
-      };
-      setDimensions(nextDimention);
-    }
-    setScrollPosition(position);
+  const getMarketplace = () => {
+    const param = createParam();
+    return instance
+      .get(`/order/search${param}`)
+      .then((response) => {
+        return response;
+      })
+      .catch(handleError);
   };
-  const catchFirstClick = (e) => {
-    if (!landingPageFirstClicked) {
-      const nextDimention = {
-        width: "calc(100vw - 163px)",
-        height: "calc(100vh - 240px)",
-        right: "81.5px",
-        bottom: "80px",
-        blobABottom: "1.5vmin",
-        blobARadius: "100px 5px 5px 5px",
-        blobAW: "2vmin",
-        blobAH: "2vmin",
-        blobAPosition: "fixed",
-        blobTextBOpacity: "1",
-        blobTextAFontSize: "3rem",
-        blobTextADivColor: "var( --color_d)",
-        blobTextASpanColor: "var(--color_c)",
-        blobTextATop: "45%",
-        blobTextALeft: "280px",
-        blobTextBTop: "45%",
-        blobTextBLeft: "80px",
-        blobTextBColor: "var(--color_c)",
-        blobArrowColor: "var(--color_c)",
-        blobArrowTop: "65%",
-        blobArrowLeft: "300px",
-        blobArrowOpacity: "1",
-      };
-      setDimensions(nextDimention);
-      setTimeout(() => {
-        setLandingPageFirstClicked(true);
-      }, 1500);
+  const navigateToMarketplace = (e) => {
+    navigate(userLogedin ? "/marketplace" : "/signin");
+  };
+  const marketOrderExec = (e) => {
+    console.log(
+      e.target.textContent.toLowerCase(),
+      e.target.id.split("buySell-")[1]
+    );
+    return instance
+      .put(`/order/exec/${e.target.id.split("buySell-")[1]}/`)
+      .then((response) => {
+        return response;
+      })
+      .catch(handleError);
+  };
+  const switchDashboardFolder = (e) => {
+    const clickedFolder = e.target.getAttribute("data-title");
+    if (clickedFolder !== "" && clickedFolder) {
+      navigate("/dashboard/" + clickedFolder);
+      setDashboardFolder(clickedFolder);
+      // getDashboard(clickedFolder);
+    }
+  };
+  const getDashboard = (folder) => {
+    return instance
+      .get(dashboardUrlMap[folder])
+      .then((response) => {
+        setDashboardList(response.data);
+        return response;
+      })
+      .catch(handleError);
+  };
+  const navigateToDashboard = (e) => {
+    navigate(userLogedin ? "/dashboard" : "/signin");
+  };
+  const getBalanceAmount = (e) => {
+    instance
+      .get("/funds/rbusd-balance/")
+      .then((response) => {
+        setAmount(
+          new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(response.data)
+        );
+        return response;
+      })
+      .catch(handleError);
+  };
+  const addNewGenerator = (e, form, rest) => {
+    e.preventDefault();
+    const formIsValid = validateForm(form);
+    if (formIsValid) {
+      setError("");
+      instance
+        .post("/generator-asset/", {
+          ...form,
+          ...rest,
+        })
+        .then((response) => {
+          setPopupId("");
+          setDashboardTableUpdate((prev) => !prev);
+          return response;
+        })
+        .catch(handleError);
+    }
+  };
+  const addNewRec = (e, form) => {
+    e.preventDefault();
+    const formIsValid = validateForm(form);
+    if (formIsValid) {
+      setError("");
+      instance
+        .post("/rec-token/mint/", form)
+        .then((response) => {
+          setPopupId("");
+          setDashboardTableUpdate((prev) => !prev);
+          return response;
+        })
+        .catch(handleError);
+    }
+  };
+  const recAction = (action, form) => {
+    instance
+      .put(`/rec-token/${action}/${recId}/`, form)
+      .then((response) => {
+        setPopupId("");
+        setDashboardTableUpdate((prev) => !prev);
+        return response;
+      })
+      .catch(handleError);
+  };
+  const submitNewOrder = (e, type, id) => {
+    e.preventDefault();
+    setError("");
+    instance
+      .put(`/order/submit/${id}/`)
+      .then((response) => {
+        setPopupId("");
+        setDashboardTableUpdate((prev) => !prev);
+        return response;
+      })
+      .catch(handleError);
+  };
+  const cancelOrder = (e, id) => {
+    e.preventDefault();
+    setError("");
+    instance
+      .put(`/order/cancel/${id}/`)
+      .then((response) => {
+        setPopupId("");
+        setDashboardTableUpdate((prev) => !prev);
+        return response;
+      })
+      .catch(handleError);
+  };
+  const draftNewOrder = (e, type, form, id) => {
+    e.preventDefault();
+    if (!id) {
+      const formIsValid = validateForm(form);
+      if (formIsValid) {
+        instance
+          .post(`/order/${type}/`, form)
+          .then((response) => {
+            setPopupId("");
+            setDashboardTableUpdate((prev) => !prev);
+            return response;
+          })
+          .catch(handleError);
+      }
+    } else {
+      instance
+        .put(`/order/${type}/${id}/`, form)
+        .then((response) => {
+          setPopupId("");
+          setDashboardTableUpdate((prev) => !prev);
+          return response;
+        })
+        .catch(handleError);
+    }
+
+    setError("");
+  };
+  const editOrder = (e, order) => {
+    const filledForm =
+      order.side === "S"
+        ? (({
+            id,
+            order_type,
+            qty,
+            price_start,
+            price_end,
+            end_dt_epoch_secs,
+            rec_token,
+          }) => ({
+            id,
+            order_type,
+            qty,
+            price_start,
+            price_end,
+            end_dt_epoch_secs,
+            rec_token,
+          }))(order)
+        : (({
+            id,
+            order_type,
+            qty,
+            price_start,
+            price_end,
+            end_dt_epoch_secs,
+            vintage_dt_min,
+            generator_types,
+            certifying_bodies,
+            states,
+          }) => ({
+            id,
+            order_type,
+            qty,
+            price_start,
+            price_end,
+            end_dt_epoch_secs,
+            vintage_dt_min,
+            generator_types,
+            certifying_bodies,
+            states,
+          }))(order);
+    setDraftedOrder({
+      side: order.side === "S" ? "sell" : "buy",
+      form: filledForm,
+    });
+    setPopupId("Orders");
+  };
+  const getAvailableGens = () => {
+    instance
+      .get("/generator-asset/")
+      .then((response) => {
+        setAvailableGens(response.data);
+      })
+      .catch(handleError);
+  };
+
+  const getCorrectData = (title, value) => {
+    try {
+      if (
+        title === "current_price" ||
+        title === "price" ||
+        title === "price_start" ||
+        title === "price_end"
+      ) {
+        return new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "USD",
+        }).format(value || 0);
+      } else if (
+        title === "withdrawn_dt" ||
+        title === "timestamp" ||
+        title === "end_dt"
+      ) {
+        return new Date(value).toISOString().split("T")[0];
+      } else {
+        return getCorrectDataMap[title][value];
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const validateForm = (form) => {
+    let err = "";
+    err += Object.keys(form)
+      .filter((key) => !form[key] && key !== "decomissioned_dt")
+      .join(", ");
+    if (err) {
+      setError("Please Fill out: " + err);
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const clickCatcher = (e) => {
+    if (e.target.classList.contains("navIcon")) {
+      setOpenMenu((prev) => !prev);
+    }
+    if (
+      (e.target.classList.contains("shrinked") &&
+        e.target.classList.contains("shrinkedBtn")) ||
+      (!e.target.classList.contains("shrinked") &&
+        !e.target.classList.contains("navIcon"))
+    ) {
+      setOpenMenu(false);
+      setError("");
+    }
+    if (
+      e.target.classList.contains("NavLink") ||
+      e.target.classList.contains("auth-extra-link")
+    ) {
+      setError("");
     }
   };
   return (
     <TbdContextProvider
       value={{
-        user,
-        newRec,
-        userType,
-        loading,
-        openedTab,
-        signupForm,
-        dimensions,
+        error,
+        amount,
+        pageMap,
+        popupId,
+        openMenu,
+        instance,
+        isSideSet,
+        currentPage,
+        userLogedin,
+        draftedOrder,
+        dashboardList,
+        availableGens,
         filterChanged,
-        landing1Ref,
-        dashboardData,
-        scrollPosition,
-        activeGenerator,
-        landingPageFirstClicked,
-        setNewRec,
-        getMarket,
-        setUserType,
-        handleSigIn,
-        handleSignUp,
-        handleScroll,
-        setOpenedTab,
-        handleSigOut,
+        blurBackDropRef,
+        dashboardFolder,
+        windowDimensions,
+        dashboardRowsCount,
+        dashboardTableUpdate,
+        marketplaceRowsCount,
+        paymentMessage,
+        setPaymentMessage,
+        login,
+        logout,
+        setError,
+        setRecId,
+        editOrder,
+        recAction,
+        setAmount,
+        addNewRec,
+        setPopupId,
+        setOpenMenu,
+        cancelOrder,
+        createParam,
+        setIsSideSet,
         getDashboard,
-        setDimensions,
-        getMarketParam,
-        catchFirstClick,
-        activateAccount,
-        setDashboardData,
-        handleSignInForm,
-        handleSignUpForm,
-        setScrollPosition,
-        setAxctiveGenerator,
-        setLandingPageFirstClicked,
+        draftNewOrder,
+        rotateBackdrop,
+        submitNewOrder,
+        setCurrentPage,
+        getMarketplace,
+        PageNavigation,
+        getCorrectData,
+        addNewGenerator,
+        setDraftedOrder,
+        marketOrderExec,
+        getAvailableGens,
+        setFilterChanged,
+        getBalanceAmount,
+        setWindowDimensions,
+        navigateToDashboard,
+        getMarketFilterParam,
+        navigateToMarketplace,
+        setDashboardRowsCount,
+        switchDashboardFolder,
+        setMarketplaceRowsCount,
       }}
     >
-      {children}{" "}
+      <div onClick={clickCatcher} style={{ overflow: "hidden" }}>
+        {" "}
+        {children}{" "}
+      </div>{" "}
     </TbdContextProvider>
   );
 };

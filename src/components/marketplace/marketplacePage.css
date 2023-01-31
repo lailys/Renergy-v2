@@ -1,0 +1,105 @@
+.type {
+  color: var(--color-purple);
+}
+.MarketSellBuyBtn {
+  margin: 0 auto;
+  padding: 0.6vh 2vw;
+  color: white;
+  font-weight: 600;
+  font-size: 0.6vw;
+  border: 0;
+  border-radius: var(--radius-button);
+  width: 60%;
+  height: 3vh;
+}
+.BUY {
+  border: solid 1px var(--color-blue);
+  background: white;
+  color: var(--color-blue);
+}
+.SELL {
+  background: var(--color-blue);
+  color: white;
+}
+.MarketSellBuyBtn:hover {
+  opacity: 0.8;
+}
+.backdrop-plain {
+  z-index: 2;
+  background: var(--color-purple);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 44vh;
+}
+.MarketPlaceFilter {
+  z-index: 2;
+  background: var(--color-purple);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  width: 100vw;
+  height: 36vh;
+}
+#dropdown-basic {
+  background: none;
+  color: white;
+  border: 0;
+  height: 8vh;
+  width: 10vw;
+}
+.MarketPlaceFilter-item {
+  margin: 0 1px;
+  border-bottom: solid white 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 11.5vw;
+  height: 8vh;
+}
+.MarketPlaceFilter-item-date {
+  /* border: solid blue 1px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 12vw;
+  height: 8vh;
+}
+.MarketPlaceFilter-item-quantity {
+  /* border: solid blue 1px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10vw;
+  height: 8vh;
+}
+.MarketPlaceFilter-item:hover {
+  border-bottom: solid var(--color-blue) 2px;
+}
+
+.dropdown-menu {
+  color: white;
+  background: var(--color-purple);
+  border-radius: 0 0 4px 4px;
+  border: solid white 1px;
+  overflow: scroll;
+  max-height: 40vh;
+  width: 100%;
+}
+.dropdown-item-text,
+.dropdown-item {
+  color: white;
+  text-align: center;
+}
+#MarketPlaceFilter-item-quantity-cntrol {
+  width: 80%;
+}
+.price-td {
+  color: var(--color-green);
+}

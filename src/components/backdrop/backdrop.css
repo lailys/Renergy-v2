@@ -1,0 +1,90 @@
+.backdrop-wrapper {
+  z-index: 0;
+  position: absolute;
+  top: 0vh;
+  left: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+.BackdropImg {
+  position: fixed;
+  top: -8vh;
+  left: 0vh;
+  border-radius: 3px;
+  width: 105vw;
+  height: 120vh;
+}
+.BackdropBlur {
+  z-index: 0;
+  backdrop-filter: blur(6px);
+  display: flex;
+  position: absolute;
+  top: -5vh;
+  left: -20vw;
+  border-radius: 3vw;
+  transform: rotate(28deg);
+  transition: all 0.8s ease-in-out;
+  width: 68vw;
+  height: 68vw;
+}
+.home-btn {
+  background: var(--color-purple-fade);
+}
+.authentication-in-btn,
+.authentication-up-btn {
+  background: var(--color-green-fade);
+  /* background: var(--color-darkBlueTwo-fade); */
+}
+.registration-btn {
+  background: var(--color-blue-fade);
+}
+.marketplace-drop {
+  background: var(--color-red-fade);
+}
+.stripe-payment-page-add {
+  background: var(--color-blue);
+}
+.stripe-payment-page-withdraw {
+  background: var(--color-green);
+}
+.stripe-payment-success-page {
+  background: var(--color-green-fade);
+}
+@media screen and (min-width: 1023px) and (max-width: 1380px) {
+  .BackdropBlur {
+    /* border: solid yellow 1px; */
+    top: -10vh;
+    left: -44vw;
+    width: 98vw;
+    height: 98vw;
+  }
+}
+@media screen and (min-width: 820px) and (max-width: 1024px) {
+  .BackdropBlur {
+    /* border: solid blue 1px; */
+    top: -5vh;
+    left: -60vw;
+    width: 115vw;
+    height: 115vw;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 819px) {
+  .BackdropBlur {
+    /* border: solid red 1px; */
+    top: -10vh;
+    left: -65vw;
+    width: 125vw;
+    height: 125vw;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 739px) {
+  .BackdropBlur {
+    /* border: solid green 1px; */
+    opacity: 0.6;
+    top: -50vh;
+    left: -50vw;
+    width: 260vh;
+    height: 260vh;
+  }
+}

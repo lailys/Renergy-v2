@@ -1,130 +1,61 @@
-import { useEffect } from "react";
-import { Routes, Route, Router } from "react-router-dom";
+import React, { useState } from "react";
 import { TbdContextComp } from "./provider/provider";
-import { useDispatch, useSelector } from "react-redux";
-
-import { history } from "./redux/helpers/history";
-import { alertActions } from "./redux/actions/alert.actions";
-import PrivateRoute from "./redux/components/PrivateRoute";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/home/HomePage";
+import Navbar from "./components/navigation/Navbar";
+import GeneralErrorContainer from "./components/generals/GeneralErrorContainer";
+import SessionTimeout from "./sessionTimeout/sessionTimeout";
+import Auth from "./components/authentication/AuthPage";
+import Backdrop from "./components/backdrop/Backdrop";
+import Marketplace from "./components/marketplace/MarketplacePage";
+import Dashboard from "./components/dashboard/DashboardPage";
+import PaymentPage from "./components/payment/PaymentPage";
+import Form from "./components/dashboard/forms/Form";
 import "./App.css";
+import PaymentSucces from "./components/payment/PaymentSucces";
 
-import LandingPage from "./landingPage/landingPage";
-import NavBar from "./navBar/navBar";
-import Register from "./register/register";
-import Sign from "./sign/sign";
-import MarketPlace from "./marketPlace/marketPlace";
-import AdminBasePage from "./admin/adminBasePage/adminBasePage";
-import ClientBasePage from "./client/clientBasePage/clientBasePage";
-import PaymentPage from "./payment/PaymentPage";
-
-function App({ store }) {
-  const alert = useSelector((state) => state.alert);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    history.listen((location, action) => {
-      // clear alert on location change
-      dispatch(alertActions.clear());
-    });
-  }, []);
+const App = () => {
   return (
-    <TbdContextComp store={store}>
-      <div className="main-container">
-        <NavBar />
-        {alert.message && (
-          <div className={`alert ${alert.type}` + " authentication-alert"}>
-            {alert.message}
-          </div>
-        )}
+    <TbdContextComp>
+      <React.Suspense fallback={<p> Loading page... </p>}>
+        {" "}
+        <GeneralErrorContainer />
+        <Navbar />
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<Home />} />{" "}
+          <Route exact path="/" element={<Home />} />{" "}
+          <Route exact path="/signin" element={<Auth mode="/signin" />} />{" "}
+          <Route exact path="/signup" element={<Auth mode="/signup" />} />{" "}
+          <Route exact path="/register" element={<Auth mode="/register" />} />{" "}
+          <Route exact path="/marketplace" element={<Marketplace />} />{" "}
+          <Route path="/dashboard" element={<Dashboard tab="Generator" />} />{" "}
           <Route
-            exact
-            path="/marketPlace"
-            element={<PrivateRoute Component={<MarketPlace />} />}
-          />
+            path="/dashboard/generator"
+            element={<Dashboard tab="Generator" />}
+          />{" "}
+          <Route path="/dashboard/recs" element={<Dashboard tab="RECs" />} />{" "}
           <Route
-            exact
-            path="/activate/:id"
-            element={<Sign type="activate" />}
-          />
-          <Route exact path="/login" element={<Sign type="in" />} />
-          <Route exact path="/signup" element={<Sign type="up" />} />
+            path="/dashboard/transaction"
+            element={<Dashboard tab="Transactions" />}
+          />{" "}
           <Route
-            exact
-            path="/user-profile"
-            element={<PrivateRoute Component={<Register />} />}
-          />
+            path="/dashboard/orders"
+            element={<Dashboard tab="Orders" />}
+          />{" "}
           <Route
-            exact
-            path="/admin-profile"
-            element={<PrivateRoute Component={<Register />} />}
-          />
-          {["generator", "recs", "orders", "transaction"].map((each, index) => (
-            <Route
-              key={index + each}
-              exact
-              path={`/user-dashboard/${each}`}
-              // element={<ClientBasePage type="/user-dashboard" />}
-              element={
-                <PrivateRoute
-                  Component={
-                    <ClientBasePage type={`/user-dashboard/${each}`} />
-                  }
-                />
-              }
-            />
-          ))}
-          <Route
-            exact
-            path="/admin-dashboard"
-            element={
-              <PrivateRoute
-                Component={<AdminBasePage type="/admin-dashboard" />}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/admin-user-list"
-            element={
-              <PrivateRoute
-                Component={<AdminBasePage type="/admin-user-list" />}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/admin-generator-list"
-            element={
-              <PrivateRoute
-                component={<AdminBasePage type="/admin-generator-list" />}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/admin-token-list"
-            element={
-              <PrivateRoute
-                Component={<AdminBasePage type="/admin-token-list" />}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/payment"
-            element={<PrivateRoute Component={<PaymentPage />} />}
-          />
-          <Route
-            exact
-            path="/register"
-            element={<PrivateRoute Component={<Register />} />}
-          />
-        </Routes>
-      </div>
+            path="/stripe-payment"
+            element={<PaymentPage tab="payment" />}
+          />{" "}
+          <Route path="/stripe-payout" element={<PaymentPage tab="payout" />} />{" "}
+          <Route path="/payment-success/" element={<PaymentSucces />} />{" "}
+        </Routes>{" "}
+        <Backdrop />
+        <Form />
+        <SessionTimeout />
+      </React.Suspense>{" "}
     </TbdContextComp>
   );
-}
+};
 
 export default App;

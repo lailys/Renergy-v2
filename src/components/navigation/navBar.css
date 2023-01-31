@@ -1,0 +1,241 @@
+.navbar-wrapper {
+  /* border: solid red 1px; */
+  z-index: 3;
+  padding: 0 4vw;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 12vh;
+}
+.HomeLink {
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 100%;
+  cursor: pointer;
+  border-radius: var(--radius-button);
+}
+.HomeLink:hover {
+  color: var(--color-800);
+}
+.NavLink {
+  padding: 0 2vw;
+  margin: 0 0.4vw;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 300;
+  font-size: 0.95vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  border-radius: var(--radius-button);
+  height: 85%;
+}
+#marketplace-btn::after {
+  content: "";
+  background: var(--color-blue);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0.2vh;
+}
+#dashboard-btn::after {
+  content: "";
+  background: var(--color-blue);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0.2vh;
+}
+.NavLink:hover {
+  background: var(--color-white-27);
+  color: white;
+}
+.NavLogo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+.LogoImg {
+  width: 2.8vw;
+}
+.LogoName {
+  color: white;
+  font-family: var(--font-exo);
+  font-weight: 800;
+  font-size: 1.5vw;
+}
+.NavMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.NavMenuLeft {
+  display: flex;
+  align-items: center;
+  margin-right: 2vw;
+  height: 45px;
+}
+.NavMenuRight {
+  display: flex;
+  align-items: center;
+  height: 45px;
+}
+#registration-btn {
+  padding: 0 2vw;
+  color: white;
+  background: var(--color-blue);
+  font-weight: 600;
+  font-size: 0.8vw;
+  margin-left: 0.5vw;
+}
+#registration-btn:hover {
+  opacity: 0.9;
+}
+#authentication-in-btn {
+  background: white;
+  color: var(--color-blue);
+  border: solid 0.1px white;
+  font-size: 0.8vw;
+  font-weight: 600;
+}
+#authentication-in-btn:hover {
+  background: var(--active-btn-one);
+}
+.NavMenuShrinked {
+  padding: 0;
+  margin: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 3.5vw;
+}
+.NavMenuBottom {
+  /* border: solid green 1px; */
+  z-index: -1;
+  padding: 0;
+  background: var(--color-blue-fade-2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  position: absolute;
+  top: 0vh;
+  right: -4vw;
+  transition: height 0.2s ease-out;
+  overflow: hidden;
+  width: 100vw;
+  height: 0;
+}
+#NavMenuBottom-opened {
+  height: 42vh;
+}
+.NavLinkShrinked {
+  /* border: solid green 1px; */
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 1.15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  height: 7.5vh;
+  width: 100%;
+}
+.NavLinkShrinked:active {
+  background: var(--active-btn-two);
+  color: white;
+}
+.NavLinkShrinked:hover {
+  background: var(--color-blue-fade);
+  /* background: var(--color-blue-fade); */
+  color: vwhite;
+}
+#shrinked-registration-btn {
+  padding: 0;
+  margin: 0;
+  color: var(--color-grey);
+  background: var(--color-blue);
+  font-weight: 700;
+  font-size: 1.2vw;
+}
+#shrinked-registration-btn:hover {
+  background: var(--color-blue);
+  opacity: 0.9;
+}
+#shrinked-authentication-in-btn {
+  color: white;
+  font-size: 1.2vw;
+  font-weight: 700;
+}
+#shrinked-authentication-in-btn:hover {
+  background: var(--color-blue);
+}
+@media screen and (min-width: 1023px) and (max-width: 1380px) {
+  .LogoImg {
+    /* border: solid yellow 1px; */
+    width: 3.2vw;
+  }
+  .LogoName {
+    font-size: 1.8vw;
+  }
+}
+@media screen and (min-width: 820px) and (max-width: 1024px) {
+  .LogoImg {
+    /* border: solid blue 1px; */
+    width: 4vw;
+  }
+  .LogoName {
+    font-size: 2.4vw;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 819px) {
+  .LogoImg {
+    /* border: solid red 1px; */
+    width: 4vw;
+  }
+  .LogoName {
+    font-size: 2.4vw;
+  }
+  .NavMenu {
+    display: none;
+  }
+  .NavMenuShrinked {
+    display: flex;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 739px) {
+  .LogoImg {
+    /* border: solid green 1px; */
+    width: 4.4vw;
+  }
+  .LogoName {
+    font-size: 3vw;
+  }
+  .NavMenu {
+    display: none;
+  }
+  .NavMenuShrinked {
+    display: flex;
+  }
+}

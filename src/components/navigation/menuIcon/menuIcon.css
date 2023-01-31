@@ -1,0 +1,50 @@
+.MenuIcon-wrapper {
+  /* border: solid blue 1px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  transition: all 0.1s ease-out;
+  height: 2vw;
+  width: 0.7vw;
+}
+#MenuIcon-wrapper-opened {
+  transform: rotate(-90deg);
+}
+.dot-icon {
+  margin: 0;
+  background: white;
+  border-radius: 10%;
+  width: 0.35vw;
+  height: 0.35vw;
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .MenuIcon-wrapper {
+    /* border: solid red 1px; */
+    height: 3vw;
+  }
+  .dot-icon {
+    width: 0.55vw;
+    height: 0.55vw;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 699px) {
+  .MenuIcon-wrapper {
+    /* border: solid green 1px; */
+    height: 3.5vw;
+  }
+  .dot-icon {
+    width: 0.6vw;
+    height: 0.6vw;
+  }
+}
+@media screen and (max-width: 499px) {
+  .MenuIcon-wrapper {
+    /* border: solid green 1px; */
+    height: 3.5vw;
+  }
+  .dot-icon {
+    width: 0.6vw;
+    height: 0.6vw;
+  }
+}

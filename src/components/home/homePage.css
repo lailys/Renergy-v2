@@ -1,0 +1,432 @@
+.Home-wrapper {
+  /* border: solid red 1px; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100vw;
+  max-height: 100vh;
+  height: 100vh;
+}
+.HomeFirstSection {
+  /* border: solid green 1px; */
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  /* min-height: 700px; */
+  width: 100vw;
+  height: 100vh;
+}
+.HomeFirstSectionDotsWrapper {
+  /* border: solid green 1px; */
+  opacity: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  justify-items: center;
+  align-items: center;
+  position: absolute;
+  top: 18vh;
+  left: 7vw;
+  overflow: hidden;
+  width: 6vw;
+  height: 15.5vh;
+}
+.Dot {
+  background: var(--color-green);
+  border-radius: 10%;
+  width: 0.5vh;
+  height: 0.5vh;
+}
+.FirstSectionText {
+  position: absolute;
+  top: 28vh;
+  left: 12vw;
+  width: 35vw;
+  height: 50vh;
+  min-height: 450px;
+}
+.FirstSectionText-left {
+  color: var(--color-green);
+  font-family: var(--font-exo);
+  font-weight: 800;
+  font-size: 4vw;
+  line-height: 4.4vw;
+  text-align: left;
+  width: 100%;
+  height: 53%;
+}
+.FirstSectionText-left span {
+  /* border: solid green 1px; */
+  color: white;
+  font-family: var(--font-exo);
+  font-weight: 800;
+  font-size: 4vw;
+  line-height: 4.4vw;
+  text-align: left;
+  min-width: 90%;
+  height: 50%;
+}
+.FirstSectionText-right {
+  color: white;
+  font-family: var(--font-exo);
+  font-weight: 500;
+  font-size: 4rem;
+  text-align: left;
+  width: 70%;
+}
+.text-description {
+  padding: 2% 0;
+  font-family: var(--font-roboto);
+  color: white;
+  word-spacing: 0.1vw;
+  line-height: 1.8vw;
+  font-weight: 300;
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 88%;
+  height: 40%;
+}
+.FirstSectionTextBtn {
+  padding: 0.5vh 3vw;
+  background: var(--color-blue);
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 600;
+  font-size: 1vm;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-button);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+@media screen and (min-width: 1023px) and (max-width: 1380px) {
+  .text-description {
+    width: 100%;
+    height: 35%;
+  }
+  .FirstSectionText-left {
+    height: 45%;
+  }
+}
+@media screen and (min-width: 820px) and (max-width: 1024px) {
+  .FirstSectionText-left {
+    color: var(--color-green);
+    font-family: var(--font-exo);
+    font-weight: 800;
+    font-size: 4vw;
+    line-height: 5.5vw;
+    text-align: left;
+    width: 100%;
+    height: 50%;
+  }
+  .FirstSectionText-left span {
+    /* border: solid green 1px; */
+    color: white;
+    line-height: 5.5vw;
+    min-width: 90%;
+    height: 50%;
+  }
+  .text-description {
+    width: 100%;
+    height: 28%;
+  }
+  .FirstSectionText-left {
+    height: 45%;
+  }
+}
+@media screen and (min-width: 740px) and (max-width: 819px) {
+  .HomeFirstSectionDotsWrapper {
+    /* border: solid green 1px; */
+    top: 18vh;
+    left: 5vw;
+    overflow: hidden;
+    width: 9vw;
+    height: 15.5vh;
+  }
+  .Dot {
+    width: 0.6vh;
+    height: 0.6vh;
+  }
+  .FirstSectionText {
+    width: 38vw;
+  }
+  .FirstSectionText-left {
+    font-size: 6.5vw;
+    line-height: 6.5vw;
+    text-align: left;
+    width: 100%;
+    height: 50%;
+  }
+  .FirstSectionText-left span {
+    /* border: solid green 1px; */
+    font-size: 4vw;
+    line-height: 5.5vw;
+    min-width: 90%;
+    height: 50%;
+  }
+  .text-description {
+    font-size: 1.4vw;
+    width: 100%;
+    height: 25%;
+  }
+  .FirstSectionText-left {
+    height: 45%;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 739px) {
+  .HomeFirstSectionDotsWrapper {
+    /* border: solid green 1px; */
+    top: 18vh;
+    left: 14vw;
+    overflow: hidden;
+    width: 15vw;
+    height: 15.5vh;
+  }
+  .Dot {
+    width: 0.6vh;
+    height: 0.6vh;
+  }
+  .FirstSectionText {
+    left: 26vw;
+    width: 60vw;
+  }
+  .FirstSectionText-left {
+    font-size: 9vw;
+    line-height: 8vw;
+    width: 100%;
+    height: 50%;
+  }
+  .FirstSectionText-left span {
+    /* border: solid green 1px; */
+    font-size: 8vw;
+    line-height: 9vw;
+    min-width: 90%;
+    height: 50%;
+  }
+  .text-description {
+    font-size: 2.5vw;
+    line-height: 3vw;
+    width: 100%;
+    height: 30%;
+  }
+  .FirstSectionText-left {
+    height: 45%;
+  }
+}
+/* @media screen and (min-width: 1023px) and (max-width: 1380px) {
+
+}
+@media screen and (min-width: 820px) and (max-width: 1024px) {
+
+}
+@media screen and (min-width: 740px) and (max-width: 819px) {
+
+}
+@media screen and (min-width: 320px) and (max-width: 739px) {
+
+} */
+
+/* @media screen and (min-width: 1000px) and (max-width: 1300px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 18vh;
+    left: 5.5vw;
+    width: 8vw;
+    height: 20vh;
+  }
+  .Dot {
+    background: var(--color-green);
+    width: 0.5vh;
+    height: 0.5vh;
+  }
+  .FirstSectionText {
+    top: 31vh;
+    left: 12vw;
+    width: 38vw;
+    height: 50vh;
+  }
+  .FirstSectionText-left {
+    font-size: 5vw;
+    line-height: 5vw;
+    height: 48%;
+  }
+  .FirstSectionText-left span {
+    font-size: 4.5vw;
+    line-height: 4.5vw;
+  }
+  .text-description {
+    padding: 2% 0;
+    line-height: 1.8vw;
+    font-size: 1.4vw;
+    align-items: flex-start;
+  }
+  .FirstSectionTextBtn {
+    font-size: 1vw;
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 999px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 18vh;
+    left: 10vw;
+    width: 10vw;
+    height: 20vh;
+  }
+  .Dot {
+    background: var(--color-green);
+    width: 0.6vh;
+    height: 0.6vh;
+  }
+  .FirstSectionText {
+    top: 32.5vh;
+    left: 18.4vw;
+    height: 50vh;
+  }
+  .FirstSectionText-left {
+    font-size: 6vw;
+    line-height: 5vw;
+    height: 45%;
+  }
+  .FirstSectionText-left span {
+    font-size: 4.5vw;
+    line-height: 4.5vw;
+  }
+  .text-description {
+    padding: 2% 0;
+    line-height: 1.8vw;
+    font-size: 1.4vw;
+    align-items: flex-start;
+  }
+  .FirstSectionTextBtn {
+    padding: 0.8vh 3vw;
+    font-size: 1vw;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 899px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 18vh;
+    left: 8vw;
+    width: 10vw;
+    height: 20vh;
+  }
+  .Dot {
+    background: var(--color-green);
+    width: 0.5vh;
+    height: 0.5vh;
+  }
+  .FirstSectionText {
+    top: 32.5vh;
+    left: 14.5vw;
+    width: 30vw;
+    height: 30vh;
+  }
+  .FirstSectionText-left {
+    font-size: 5vw;
+    line-height: 5vw;
+    height: 45%;
+  }
+  .FirstSectionText-left span {
+    font-size: 5vw;
+    line-height: 5vw;
+  }
+  .text-description {
+    padding: 2% 0;
+    line-height: 1.8vw;
+    font-size: 1.6vw;
+    align-items: flex-start;
+    height: 30%;
+  }
+  .FirstSectionTextBtn {
+    padding: 0.6vh 3vw;
+    font-size: 1vw;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 799px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 18vh;
+    left: 14vw;
+    width: 14vw;
+    height: 20vh;
+  }
+  .Dot {
+    background: var(--color-green);
+    width: 0.6vh;
+    height: 0.6vh;
+  }
+  .FirstSectionText {
+    top: 32vh;
+    left: 25.5vw;
+    height: 45vh;
+    width: 40vw;
+  }
+  .FirstSectionText-left {
+    font-size: 8vw;
+    line-height: 8vw;
+    height: 50%;
+  }
+  .FirstSectionText-left span {
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+  .text-description {
+    padding: 2% 0;
+    line-height: 2vw;
+    font-size: 2vw;
+    align-items: flex-start;
+    width: 60%;
+  }
+  .FirstSectionTextBtn {
+    padding: 0.6vh 3.5vw;
+    font-size: 2vw;
+    left: 0;
+    right: 40%;
+  }
+}
+@media screen and (max-width: 699px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 21vh;
+    left: 12.3vw;
+    width: 16vw;
+    height: 20vh;
+  }
+  .Dot {
+    background: var(--color-green);
+    width: 0.7vh;
+    height: 0.7vh;
+  }
+  .FirstSectionText {
+    top: 35.6vh;
+    left: 25.5vw;
+    height: 40vh;
+    width: 30vw;
+  }
+  .FirstSectionText-left {
+    font-size: 8vw;
+    line-height: 8vw;
+    height: 45%;
+  }
+  .FirstSectionText-left span {
+    font-size: 8vw;
+    line-height: 8vw;
+  }
+  .text-description {
+    line-height: 2.2vw;
+    font-size: 2.2vw;
+    align-items: flex-start;
+  }
+  .FirstSectionTextBtn {
+    padding: 0.6vh 3.5vw;
+    font-size: 2vw;
+  }
+} */

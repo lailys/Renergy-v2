@@ -1,0 +1,32 @@
+.Table-wrapper {
+  z-index: 1;
+  /* border: solid red 1px; */
+  padding: 1rem 1rem;
+  background: white;
+  font-family: var(--font-roboto);
+  position: fixed;
+  top: 36vh;
+  left: 15vw;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-form) var(--radius-form);
+  box-shadow: var(--box-shadow);
+  width: 70vw;
+  height: 40vh;
+}
+
+th {
+  color: var(--color-300);
+  text-align: center;
+}
+td {
+  color: var(--color-300);
+  font-size: 0.75vw;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 13vw;
+  height: calc(32vh / 7);
+}
+.type {
+  color: var(--color-purple);
+}

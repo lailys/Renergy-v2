@@ -1,0 +1,198 @@
+.Dashboard {
+}
+.DashboardFilter {
+  z-index: 2;
+  /* background: var(--color-blue); */
+  background: var(--color-green);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  width: 100vw;
+  height: 36vh;
+}
+.DashboardFilter-item {
+  margin: 0 2px;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 800;
+  font-size: 0.9vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid white 4px;
+  text-decoration: none;
+  border-radius: 4px 4px 0 0;
+  width: calc((70vw / 3.9) - 12px);
+  height: 8vh;
+}
+.DashboardFilter-item:hover {
+  color: white;
+  /* color: var(--color-purple); */
+  /* border-bottom: solid var(--color-blue) 3px; */
+  border-bottom: solid var(--color-purple) 3px;
+}
+#DashboardFilter-active-tab {
+  border-bottom: solid var(--color-purple) 4px;
+}
+.DahboardBtn {
+  color: white;
+  background: var(--color-purple);
+  padding: 1.5vh 3vw;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 600;
+  font-size: 0.8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-button);
+  position: fixed;
+  bottom: 8vh;
+  right: 15vw;
+  width: 15vw;
+  height: 5vh;
+}
+.DahboardBtn:hover {
+  opacity: 0.9;
+}
+.DashboardRetireWithdrawBtn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2.5vh;
+}
+.DashboardRetireWithdrawBtn {
+  font-family: var(--font-roboto);
+  font-weight: 900;
+  font-size: 0.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border: var(--color-blue) solid 1px;
+  width: 50%;
+  height: 3vh;
+}
+.DashboardRetireWithdrawBtn:first-child {
+  background: var(--color-blue);
+  color: white;
+  border-radius: 3px 0 0 3px;
+  box-shadow: var(--button-shadow);
+}
+.DashboardRetireWithdrawBtn:nth-child(2) {
+  background: white;
+  color: var(--color-blue);
+  border-radius: 0 3px 3px 0;
+}
+.DashboardRetireWithdrawBtn:hover {
+  opacity: 0.8;
+}
+.ACCEPTED {
+  background: var(--color-blue);
+}
+.DRAFT {
+  background: var(--color-green);
+}
+.indv-order-btn {
+  margin-left: 15%;
+  color: white;
+  font-family: var(--font-roboto);
+  font-weight: 400;
+  font-size: 0.6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: var(--radius-button);
+  width: 70%;
+  height: 2.2vh;
+}
+.indv-order-btn:hover {
+  opacity: 0.8;
+}
+.DashboardBlance-wrapper {
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: fixed;
+  bottom: 11vh;
+  right: 15vw;
+  width: 70vw;
+  height: 13vh;
+}
+.BalanceAmount {
+  color: var(--color-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.BalanceAmount-text-title {
+  color: var(--color-purple);
+  font-family: var(--font-roboto);
+  font-weight: 600;
+  font-size: 1.6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.BalanceAmount-text-amount {
+  padding: 0 1vw;
+  color: var(--color-green);
+  /* color: var(--color-blue); */
+  font-family: var(--font-ubuntu);
+  font-weight: 400;
+  font-size: 1.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.BalanceBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8vw;
+  height: 13vh;
+}
+.BalanceBtns-add,
+.BalanceBtns-withdraw {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font---font-ubuntu);
+  font-weight: 900;
+  font-size: 1vw;
+  line-height: 1vw;
+  border: solid 2px var(--color-green);
+  cursor: pointer;
+  width: 3vw;
+  height: 3.8vh;
+}
+.BalanceBtns-add {
+  color: white;
+  background: var(--color-green);
+  border-radius: 6px 0 0 6px;
+  box-shadow: var(--button-shadow);
+}
+.BalanceBtns-withdraw {
+  color: var(--color-green);
+  border-radius: 0 6px 6px 0;
+}
+.BalanceBtns-add:hover,
+.BalanceBtns-withdraw:hover {
+  opacity: 0.7;
+}
+#disabled-actions {
+  pointer-events: none;
+  opacity: 0.5;
+}

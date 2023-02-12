@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { TbdContext } from "../../provider/provider";
 import LazyLoad from "react-lazy-load";
-import LargLanding from "../../imgs/largLanding.png";
+import LargLanding from "../../imgs/largLanding1.png";
 import SmallLanding from "../../imgs/smallLanding.png";
 import { pageMap } from "../../utils/map";
 import "./backdrop.css";
@@ -18,12 +18,19 @@ function Backdrop() {
   return (
     <div className="backdrop-wrapper">
       <LazyLoad>
-        <img src={LargLanding} alt="landing" className="BackdropImg" />
-      </LazyLoad>{" "}
-      <div
-        ref={context.blurBackDropRef}
-        className={`BackdropBlur ${pageMap[window.location.pathname]}`}
-      />{" "}
+        <img
+          src={LargLanding}
+          ref={context.imgBackDropRef}
+          alt="landing"
+          className="BackdropImg"
+        />
+      </LazyLoad>
+      <div className="BackdropBlur-wrapper">
+        <div
+          ref={context.blurBackDropRef}
+          className={`BackdropBlur ${pageMap[window.location.pathname][0]}`}
+        />
+      </div>
     </div>
   );
 }

@@ -12,11 +12,11 @@ function DashboardBlance() {
   const navigate = useNavigate();
   const payment = (e) => {
     if (e.target.className === "BalanceBtns-add") {
-      context.setCurrentPage(context.pageMap[window.location.pathname]);
+      context.setCurrentPage(context.pageMap[window.location.pathname][0]);
       navigate("/stripe-payment");
     }
     if (e.target.className === "BalanceBtns-withdraw") {
-      context.setCurrentPage(context.pageMap[window.location.pathname]);
+      context.setCurrentPage(context.pageMap[window.location.pathname][0]);
       navigate("/stripe-payout");
     }
   };

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { url } from "../utils/map";
 import { getInstance } from "../utils/axiosInctance";
-import { getCorrectDataMap, dashboardUrlMap } from "../utils/map";
+import { getCorrectDataMap, dashboardUrlMap, pageMap } from "../utils/map";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
@@ -21,22 +21,23 @@ function getWindowDimensions() {
 }
 
 export const TbdContextComp = ({ children }) => {
-  const pageMap = {
-    "/": "home-btn",
-    "/home": "home-btn",
-    "/signin": "authentication-in-btn",
-    "/signup": "authentication-up-btn",
-    "/register": "registration-btn",
-    "/stripe-payment-add": "stripe-payment-page-add",
-    "/stripe-payment-withdraw": "stripe-payment-page-withdraw",
-  };
+  // const pageMap = {
+  //   "/": "home-btn",
+  //   "/home": "home-btn",
+  //   "/signin": "authentication-in-btn",
+  //   "/signup": "authentication-up-btn",
+  //   "/register": "registration-btn",
+  //   "/stripe-payment-add": "stripe-payment-page-add",
+  //   "/stripe-payment-withdraw": "stripe-payment-page-withdraw",
+  // };
   const navigate = useNavigate();
   const instance = getInstance();
   const blurBackDropRef = useRef(null);
+  const imgBackDropRef = useRef(null);
 
   const [error, setError] = useState("");
   const [paymentMessage, setPaymentMessage] = useState("");
-  const [backdropRotation, setBackdropRotation] = useState(28);
+  const [backdropRotation, setBackdropRotation] = useState(55);
   const [amount, setAmount] = useState(0);
   const [popupId, setPopupId] = useState("");
   const [recId, setRecId] = useState(null);
@@ -61,8 +62,9 @@ export const TbdContextComp = ({ children }) => {
     "generator",
     0,
   ]);
+
   const [currentPage, setCurrentPage] = useState(
-    pageMap[window.location.pathname]
+    pageMap[window.location.pathname][0]
   );
   const [userLogedin, setUserLogedin] = useState(
     localStorage.getItem("user") ? localStorage.getItem("user") : null
@@ -75,7 +77,11 @@ export const TbdContextComp = ({ children }) => {
     vintage_dt_min: "",
   });
   useEffect(() => {
+    backDropControl();
+  }, []);
+  useEffect(() => {
     function handleResize() {
+      backDropControl();
       setWindowDimensions(getWindowDimensions());
     }
 
@@ -91,30 +97,45 @@ export const TbdContextComp = ({ children }) => {
     )
       navigate("/signin");
   });
+  const backDropControl = () => {
+    blurBackDropRef.current.style.top = `-40vh`;
+    if (window.innerWidth >= 1350) {
+      blurBackDropRef.current.style.left = `calc(( 200vh - 40vw) * -1)`;
+      blurBackDropRef.current.style.transform = `rotate(${
+        pageMap[window.location.pathname][1] || 55
+      }deg)`;
+    } else if (window.innerWidth >= 820 && window.innerWidth < 1350) {
+      blurBackDropRef.current.style.left = `calc(( 200vh - 55vw) * -1)`;
+      blurBackDropRef.current.style.transform = `rotate(90deg)`;
+    } else if (window.innerWidth < 820) {
+      blurBackDropRef.current.style.left = `calc(( 200vh - 100vw) * -1)`;
+    }
+  };
   const PageNavigation = (e) => {
     if (
       e.target.classList.contains("link") &&
-      currentPage !== pageMap[window.location.pathname] &&
-      blurBackDropRef.current
+      currentPage !== pageMap[window.location.pathname][0] &&
+      blurBackDropRef.current &&
+      window.innerWidth >= 1350
     ) {
-      const rotation = backdropRotation === 28 ? -68 : 28;
+      const rotation = pageMap[window.location.pathname][1] || 55;
       blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
       setBackdropRotation(rotation);
     }
     setDashboardFolder("generator");
-    setCurrentPage(pageMap[window.location.pathname]);
+    setCurrentPage(pageMap[window.location.pathname][0]);
   };
   const rotateBackdrop = (page) => {
     navigate(page);
     if (blurBackDropRef.current) {
-      const rotation = backdropRotation === 28 ? -67 : 28;
+      const rotation = pageMap[window.location.pathname][1] || 55;
       blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
       setBackdropRotation(rotation);
-      setCurrentPage(pageMap[page]);
+      setCurrentPage(pageMap[page][0]);
     }
   };
 
-  function login(e, user) {
+  const login = (e, user) => {
     e.preventDefault();
     var config = {
       method: "post",
@@ -135,7 +156,7 @@ export const TbdContextComp = ({ children }) => {
         return response;
       })
       .catch(handleError);
-  }
+  };
   const logout = (e) => {
     localStorage.removeItem("user");
     localStorage.removeItem("authTokens");
@@ -469,6 +490,7 @@ export const TbdContextComp = ({ children }) => {
         dashboardList,
         availableGens,
         filterChanged,
+        imgBackDropRef,
         blurBackDropRef,
         dashboardFolder,
         windowDimensions,
@@ -513,7 +535,12 @@ export const TbdContextComp = ({ children }) => {
         setMarketplaceRowsCount,
       }}
     >
-      <div onClick={clickCatcher} style={{ overflow: "hidden" }}>
+      <div
+        onClick={clickCatcher}
+        style={{
+          overflow: "hidden",
+        }}
+      >
         {" "}
         {children}{" "}
       </div>{" "}

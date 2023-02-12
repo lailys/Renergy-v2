@@ -1,13 +1,13 @@
 export const url = "http://127.0.0.1:3000/"
 export const pageMap = {
-  "/": "home-btn",
-  "/home": "home-btn",
-  "/signin": "authentication-in-btn",
-  "/signup": "authentication-up-btn",
-  "/register": "registration-btn",
-  "/stripe-payment": "stripe-payment-page-add",
-  "/stripe-payout": "stripe-payment-page-withdraw",
-  "/payment-success/": "stripe-payment-success-page"
+  "/": ["home-btn", 55],
+  "/home": ["home-btn", 55],
+  "/signin": ["authentication-in-btn", 145],
+  "/signup": ["authentication-up-btn", 235],
+  "/register": ["registration-btn", 325],
+  "/stripe-payment": ["stripe-payment-page-add"],
+  "/stripe-payout": ["stripe-payment-page-withdraw"],
+  "/payment-success/": ["stripe-payment-success-page"]
 };
 export const getCorrectDataMap = {
   certifying_bodies_for_ui: {

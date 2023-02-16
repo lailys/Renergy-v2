@@ -82,6 +82,6 @@ input:hover {
 }
 @media (min-aspect-ratio: 5/2) {
   body {
-    display: none;
+    /* display: none; */
   }
 }

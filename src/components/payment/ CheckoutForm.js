@@ -82,6 +82,8 @@ export default function CheckoutForm({
 
     setIsLoading(false);
   };
+  console.log(window.location.pathname, "333333");
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <div className="payment-amount">
@@ -92,10 +94,9 @@ export default function CheckoutForm({
           step="0.01"
           min="1"
           onChange={(e) => setAmount(e.target.value)}
-        />
-      </div>
+        />{" "}
+      </div>{" "}
       {tab === "payment" && <PaymentElement id="payment-element" />}
-
       <button
         disabled={isLoading || !stripe || !elements}
         id="submit"
@@ -106,17 +107,20 @@ export default function CheckoutForm({
         }
       >
         <span id="button-text">
+          {" "}
           {isLoading ? (
-            <div className="spinner" id="spinner"></div>
+            <div className="spinner" id="spinner">
+              {" "}
+            </div>
           ) : window.location.pathname === "/stripe-payment" ? (
             "Pay now"
           ) : (
             "Withdraw now"
-          )}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message"> {message} </div>}
+          )}{" "}
+        </span>{" "}
+      </button>{" "}
+      {/* Show any error or success messages */}{" "}
+      {message && <div id="payment-message"> {message} </div>}{" "}
     </form>
   );
 }

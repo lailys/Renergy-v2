@@ -18,6 +18,7 @@ import PaymentSucces from "./components/payment/PaymentSucces";
 const App = () => {
   return (
     <TbdContextComp>
+      {" "}
       <React.Suspense fallback={<p> Loading page... </p>}>
         {" "}
         <GeneralErrorContainer />

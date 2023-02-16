@@ -9,7 +9,9 @@ import React, {
   memo,
 } from "react";
 import moment from "moment";
-import { TbdContext } from "../provider/provider";
+import {
+  TbdContext
+} from "../provider/provider";
 
 const SessionTimeout = () => {
   const context = useContext(TbdContext);
@@ -96,7 +98,7 @@ const SessionTimeout = () => {
   // }
 
   // change fragment to modal and handleclose func to close
-  return <Fragment />;
+  return <Fragment / > ;
 };
 
 export default memo(SessionTimeout);

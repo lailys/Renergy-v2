@@ -21,15 +21,6 @@ function getWindowDimensions() {
 }
 
 export const TbdContextComp = ({ children }) => {
-  // const pageMap = {
-  //   "/": "home-btn",
-  //   "/home": "home-btn",
-  //   "/signin": "authentication-in-btn",
-  //   "/signup": "authentication-up-btn",
-  //   "/register": "registration-btn",
-  //   "/stripe-payment-add": "stripe-payment-page-add",
-  //   "/stripe-payment-withdraw": "stripe-payment-page-withdraw",
-  // };
   const navigate = useNavigate();
   const instance = getInstance();
   const blurBackDropRef = useRef(null);
@@ -37,11 +28,11 @@ export const TbdContextComp = ({ children }) => {
 
   const [error, setError] = useState("");
   const [paymentMessage, setPaymentMessage] = useState("");
-  const [backdropRotation, setBackdropRotation] = useState(55);
   const [amount, setAmount] = useState(0);
   const [popupId, setPopupId] = useState("");
   const [recId, setRecId] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [isSideSet, setIsSideSet] = useState(false);
   const [dashboardList, setDashboardList] = useState([]);
   const [availableGens, setAvailableGens] = useState([]);
@@ -62,9 +53,10 @@ export const TbdContextComp = ({ children }) => {
     "generator",
     0,
   ]);
-
   const [currentPage, setCurrentPage] = useState(
-    pageMap[window.location.pathname][0]
+    pageMap[window.location.pathname]
+      ? pageMap[window.location.pathname][0]
+      : ""
   );
   const [userLogedin, setUserLogedin] = useState(
     localStorage.getItem("user") ? localStorage.getItem("user") : null
@@ -76,12 +68,9 @@ export const TbdContextComp = ({ children }) => {
     certifying_bodies_for_ui: "",
     vintage_dt_min: "",
   });
-  useEffect(() => {
-    backDropControl();
-  }, []);
+
   useEffect(() => {
     function handleResize() {
-      backDropControl();
       setWindowDimensions(getWindowDimensions());
     }
 
@@ -97,40 +86,16 @@ export const TbdContextComp = ({ children }) => {
     )
       navigate("/signin");
   });
-  const backDropControl = () => {
-    blurBackDropRef.current.style.top = `-40vh`;
-    if (window.innerWidth >= 1350) {
-      blurBackDropRef.current.style.left = `calc(( 200vh - 40vw) * -1)`;
-      blurBackDropRef.current.style.transform = `rotate(${
-        pageMap[window.location.pathname][1] || 55
-      }deg)`;
-    } else if (window.innerWidth >= 820 && window.innerWidth < 1350) {
-      blurBackDropRef.current.style.left = `calc(( 200vh - 55vw) * -1)`;
-      blurBackDropRef.current.style.transform = `rotate(90deg)`;
-    } else if (window.innerWidth < 820) {
-      blurBackDropRef.current.style.left = `calc(( 200vh - 100vw) * -1)`;
-    }
+  const clearErr = (e) => {
+    if (e.target.classList.contains("clear-err")) setError("");
   };
   const PageNavigation = (e) => {
-    if (
-      e.target.classList.contains("link") &&
-      currentPage !== pageMap[window.location.pathname][0] &&
-      blurBackDropRef.current &&
-      window.innerWidth >= 1350
-    ) {
-      const rotation = pageMap[window.location.pathname][1] || 55;
-      blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
-      setBackdropRotation(rotation);
-    }
     setDashboardFolder("generator");
     setCurrentPage(pageMap[window.location.pathname][0]);
   };
   const rotateBackdrop = (page) => {
     navigate(page);
     if (blurBackDropRef.current) {
-      const rotation = pageMap[window.location.pathname][1] || 55;
-      blurBackDropRef.current.style.transform = `rotate(${rotation + "deg"})`;
-      setBackdropRotation(rotation);
       setCurrentPage(pageMap[page][0]);
     }
   };
@@ -150,8 +115,10 @@ export const TbdContextComp = ({ children }) => {
         localStorage.setItem("authTokens", JSON.stringify(response.data));
         localStorage.setItem("user", currUser);
         localStorage.setItem("isAdmin", response.data.is_superuser);
+        setIsRegistered(response.data["is_superuser"]);
         setUserLogedin(currUser);
-        rotateBackdrop("/home");
+        setCurrentPage(pageMap["/"][0]);
+        navigate("/");
         setError("");
         return response;
       })
@@ -455,6 +422,7 @@ export const TbdContextComp = ({ children }) => {
     }
   };
   const clickCatcher = (e) => {
+    console.log(e.target, ">>>>>>>>>>>>>>>>>>>>>.");
     if (e.target.classList.contains("navIcon")) {
       setOpenMenu((prev) => !prev);
     }
@@ -486,19 +454,19 @@ export const TbdContextComp = ({ children }) => {
         isSideSet,
         currentPage,
         userLogedin,
+        isRegistered,
         draftedOrder,
         dashboardList,
         availableGens,
         filterChanged,
         imgBackDropRef,
+        paymentMessage,
         blurBackDropRef,
         dashboardFolder,
         windowDimensions,
         dashboardRowsCount,
         dashboardTableUpdate,
         marketplaceRowsCount,
-        paymentMessage,
-        setPaymentMessage,
         login,
         logout,
         setError,
@@ -511,6 +479,7 @@ export const TbdContextComp = ({ children }) => {
         setOpenMenu,
         cancelOrder,
         createParam,
+        clickCatcher,
         setIsSideSet,
         getDashboard,
         draftNewOrder,
@@ -526,6 +495,7 @@ export const TbdContextComp = ({ children }) => {
         getAvailableGens,
         setFilterChanged,
         getBalanceAmount,
+        setPaymentMessage,
         setWindowDimensions,
         navigateToDashboard,
         getMarketFilterParam,
@@ -535,15 +505,7 @@ export const TbdContextComp = ({ children }) => {
         setMarketplaceRowsCount,
       }}
     >
-      <div
-        onClick={clickCatcher}
-        style={{
-          overflow: "hidden",
-        }}
-      >
-        {" "}
-        {children}{" "}
-      </div>{" "}
+      <div onClick={clearErr}>{children} </div>
     </TbdContextProvider>
   );
 };

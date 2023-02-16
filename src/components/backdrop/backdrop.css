@@ -3,7 +3,7 @@
   position: absolute;
   top: 0vh;
   left: 0;
-  overflow: scroll;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   min-height: 1025px;
@@ -26,11 +26,12 @@
   height: 100vh;
 }
 .BackdropBlur {
-  border-radius: 2vmin;
+  opacity: 0.9;
+  border-radius: 18% 82% 61% 39% / 14% 33% 67% 86%;
   transition: all 0.5s ease-in-out;
   position: absolute;
-  width: 200vh;
-  height: 200vh;
+  width: 110vh;
+  height: 110vh;
 }
 .home-btn {
   background: var(--color-purple-fade);
@@ -38,7 +39,6 @@
 .authentication-in-btn,
 .authentication-up-btn {
   background: var(--color-green-fade);
-  /* background: var(--color-darkBlueTwo-fade); */
 }
 .registration-btn {
   background: var(--color-blue-fade);
@@ -55,8 +55,100 @@
 .stripe-payment-success-page {
   background: var(--color-green-fade);
 }
-@media screen and (max-width: 819px) {
+@media screen and (min-width: 950px) and (max-width: 1350px) {
   .BackdropBlur {
-    border-radius: 0vmin;
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+  }
+  .registration-btn,
+  .home-btn,
+  .authentication-in-btn,
+  .authentication-up-btn {
+    left: 0;
+    top: 0;
+    width: 65vw;
+    height: 100vh;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 949px) {
+  .BackdropBlur {
+    border-radius: 34% 66% 61% 39% / 28% 33% 67% 72%;
+  }
+  .registration-btn,
+  .home-btn {
+    left: 2vw;
+    top: 15vh;
+    width: 95vw;
+    height: 85vh;
+  }
+  .authentication-in-btn {
+    left: 15vw;
+    top: 30vh;
+    width: 70vw;
+    height: 60vh;
+  }
+  .authentication-up-btn {
+    left: 11vw;
+    top: 30vh;
+    width: 78vw;
+    height: 70vh;
+  }
+}
+@media screen and (min-width: 440px) and (max-width: 699px) {
+  .BackdropBlur {
+    border-radius: 34% 66% 61% 39% / 28% 33% 67% 72%;
+  }
+  .registration-btn {
+    left: 2vw;
+    top: 15vh;
+    width: 95vw;
+    height: 85vh;
+  }
+  .authentication-in-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 54vh;
+  }
+  .authentication-up-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 68vh;
+  }
+  .home-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 55vh;
+  }
+}
+@media screen and (max-width: 439px) {
+  .BackdropBlur {
+    border-radius: 34% 66% 61% 39% / 28% 33% 67% 72%;
+  }
+  .registration-btn {
+    left: 0vw;
+    top: 22vh;
+    width: 100vw;
+    height: 78vh;
+  }
+  .authentication-in-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 54vh;
+  }
+  .authentication-up-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 68vh;
+  }
+  .home-btn {
+    left: 5vw;
+    top: 30vh;
+    width: 90vw;
+    height: 55vh;
   }
 }

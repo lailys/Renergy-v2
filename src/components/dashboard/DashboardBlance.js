@@ -10,6 +10,7 @@ function DashboardBlance() {
     console.log("Context dose not exists");
   }
   const navigate = useNavigate();
+
   const payment = (e) => {
     if (e.target.className === "BalanceBtns-add") {
       context.setCurrentPage(context.pageMap[window.location.pathname][0]);

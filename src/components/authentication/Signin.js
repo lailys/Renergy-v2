@@ -18,10 +18,8 @@ function Signin() {
 
   return (
     <div className="col-md-4">
-      <label className="Auth-form-title">Login</label>
       <form id="loginform" onSubmit={(e) => context.login(e, user)}>
         <div className="form-group">
-          <label>Email</label>
           <input
             type="email"
             className="form-control"
@@ -36,7 +34,6 @@ function Signin() {
           </small>
         </div>
         <div className="form-group">
-          <label>Password</label>
           <input
             type="password"
             className="form-control"
@@ -50,18 +47,18 @@ function Signin() {
         </div>
         <button
           type="submit"
-          className="btn btn-lg in-btn"
+          className="btn btn-lg in-btn clear-err"
           id="form-submit-btn"
         >
-          Sign in
+          LOGIN
         </button>
         <p className="auth-extra text-right">
           {" Do not have an account yet," + " "}
-          <Link to="/signup" className="auth-extra-link link">
+          <Link to="/signup" className="auth-extra-link link clear-err">
             sign up?
           </Link>
           {" " + " or Forgot" + " "}
-          <Link to="/signup" className="auth-extra-link">
+          <Link to="/signup" className="auth-extra-link clear-err">
             password?
           </Link>
         </p>

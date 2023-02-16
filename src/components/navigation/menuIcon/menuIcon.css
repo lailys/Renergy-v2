@@ -18,7 +18,8 @@
   width: 0.35vw;
   height: 0.35vw;
 }
-@media screen and (min-width: 700px) and (max-width: 900px) {
+
+@media screen and (min-width: 950px) and (max-width: 1350px) {
   .MenuIcon-wrapper {
     /* border: solid red 1px; */
     height: 3vw;
@@ -28,23 +29,14 @@
     height: 0.55vw;
   }
 }
-@media screen and (min-width: 500px) and (max-width: 699px) {
+@media screen and (max-width: 949px) {
   .MenuIcon-wrapper {
-    /* border: solid green 1px; */
-    height: 3.5vw;
+    /* border: solid red 1px; */
+    height: 4vw;
   }
   .dot-icon {
-    width: 0.6vw;
-    height: 0.6vw;
-  }
-}
-@media screen and (max-width: 499px) {
-  .MenuIcon-wrapper {
-    /* border: solid green 1px; */
-    height: 3.5vw;
-  }
-  .dot-icon {
-    width: 0.6vw;
-    height: 0.6vw;
+    background: var(--color-blue);
+    width: 0.7vw;
+    height: 0.7vw;
   }
 }

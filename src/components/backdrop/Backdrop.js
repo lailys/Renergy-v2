@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { TbdContext } from "../../provider/provider";
 import LazyLoad from "react-lazy-load";
 import LargLanding from "../../imgs/largLanding1.png";
-import SmallLanding from "../../imgs/smallLanding.png";
 import { pageMap } from "../../utils/map";
 import "./backdrop.css";
 
@@ -11,8 +10,11 @@ function Backdrop() {
   if (!context) {
     console.log("Context dose not exists");
   }
-
-  if (!pageMap[window.location.pathname]) {
+  console.log(window.location.pathname, "Context dose not exists");
+  if (
+    window.location.pathname.includes("/dashboard") ||
+    window.location.pathname.includes("/marketplace")
+  ) {
     return <> </>;
   }
   return (
@@ -28,7 +30,11 @@ function Backdrop() {
       <div className="BackdropBlur-wrapper">
         <div
           ref={context.blurBackDropRef}
-          className={`BackdropBlur ${pageMap[window.location.pathname][0]}`}
+          className={`BackdropBlur ${
+            pageMap[window.location.pathname]
+              ? pageMap[window.location.pathname][0]
+              : ""
+          }`}
         />
       </div>
     </div>

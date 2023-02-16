@@ -12,13 +12,13 @@ function Navbar() {
   }
   return (
     <div className="navbar-wrapper" onClick={context.PageNavigation}>
-      <NavLogo />
+      <NavLogo />{" "}
       {context.currentPage !== "authentication-up-btn" &&
         context.currentPage !== "authentication-in-btn" && (
           <>
-            <NavMenu /> <NavMenuShrinked />
+            <NavMenu curr={context.currentPage} /> <NavMenuShrinked />
           </>
-        )}
+        )}{" "}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 .navbar-wrapper {
-  /* border: solid red 1px; */
   z-index: 3;
-  padding: 0 3vw;
+  padding: 0 4vw;
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -62,10 +61,8 @@
 }
 .NavLink:hover {
   background: var(--color-white-27);
-  /* color: white; */
 }
 .NavLogo {
-  /* border: solid red 1px; */
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -144,7 +141,7 @@
   height: 0;
 }
 #NavMenuBottom-opened {
-  height: 35vh;
+  /* height: 35vh; */
 }
 .NavLinkShrinked {
   border-top: solid var(--color-purple) 0.1px;
@@ -191,7 +188,7 @@
 #shrinked-authentication-in-btn:hover {
   background: var(--color-blue);
 }
-@media screen and (min-width: 1023px) and (max-width: 1380px) {
+@media screen and (min-width: 950px) and (max-width: 1380px) {
   .LogoImg {
     width: 3.2vw;
   }
@@ -199,20 +196,13 @@
     font-size: 1.8vw;
   }
 }
-@media screen and (min-width: 820px) and (max-width: 1024px) {
+@media screen and (max-width: 949px) {
   .LogoImg {
-    width: 4vw;
+    width: 5.5vw;
   }
   .LogoName {
-    font-size: 2.4vw;
-  }
-}
-@media screen and (min-width: 740px) and (max-width: 819px) {
-  .LogoImg {
-    width: 4vw;
-  }
-  .LogoName {
-    font-size: 2.4vw;
+    color: var(--color-blue);
+    font-size: 1.5rem;
   }
   .NavMenu {
     display: none;
@@ -221,17 +211,25 @@
     display: flex;
   }
 }
-@media screen and (min-width: 320px) and (max-width: 739px) {
+
+/* ----------- iPhone 13 and 13 Pro ----------- */
+/* Portrait */
+@media only screen and (min-device-width: 375px) and (max-device-width: 390px) and (orientation: portrait) {
+  .NavMenu {
+    display: none;
+  }
+  .NavMenuShrinked {
+    display: flex;
+  }
   .LogoImg {
     width: 4.4vw;
   }
   .LogoName {
-    font-size: 3vw;
+    color: var(--color-blue);
+    font-size: 1.2rem;
   }
-  .NavMenu {
-    display: none;
-  }
-  .NavMenuShrinked {
-    display: flex;
-  }
+}
+/* Landscape */
+@media only screen and (min-device-width: 844px) and (max-device-width: 926px) and (orientation: landscape) {
+  /* Styles for landscape mode on iPhone 13 and 13 Pro go here */
 }

@@ -1,36 +1,99 @@
+.GeneralErrorContainer {
+  opacity: 0.9;
+  /* background-color: var(--color-darkBlueTwo); */
+  background-color: var(--color-black);
+  color: white;
+  border-radius: 34% 66% 61% 39% / 28% 33% 67% 72%;
+  z-index: 2000;
+  padding: 10vmin;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  position: fixed;
+  top: 40vh;
+  right: 18vmin;
+  max-width: 40vmin;
+  min-height: 45vmin;
+}
+.GeneralErrorContainer span {
+  color: white;
+  font-family: var(--font-roboto);
+  line-height: 1.2rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
 .ErrorContainer {
   z-index: 10;
   padding: 0;
-  color: var(--color-orange);
+  color: white;
   font-family: var(--font-roboto);
-  line-height: 0.9vw;
-  font-size: 1vw;
-  font-weight: 600;
+  line-height: 1.8rem;
+  font-size: 1.3rem;
+  font-weight: 300;
   text-align: center;
   max-width: 33vw;
-  max-height: 5vh;
+  min-height: 5vh;
 }
-.ErrorContainer span {
-  padding: 0;
-  color: var(--color-orange);
-  font-family: var(--font-roboto);
-  line-height: 0.9vw;
-  font-size: 1vw;
-  font-weight: 500;
-  width: 33vw;
-  max-width: 33vw;
+@media screen and (min-width: 950px) and (max-width: 1350px) {
+  .GeneralErrorContainer {
+    top: 60vh;
+    right: 5vmin;
+    min-width: 40vmin;
+    max-width: 40vmin;
+    min-height: 40vmin;
+  }
+  .ErrorContainer {
+    color: white;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    max-width: 40vw;
+    max-height: 10vh;
+  }
 }
-.GeneralErrorContainer {
-  /* border: solid red 1px; */
-  z-index: 2000;
-  padding: 3vw 3vw;
-  color: var(--color-orange);
-  font-family: var(--font-roboto);
-  line-height: 0.9vw;
-  font-size: 0.9vw;
-  font-weight: 500;
-  position: fixed;
-  bottom: 8vmin;
-  right: 10vmin;
-  min-width: 40vw;
+@media screen and (min-width: 700px) and (max-width: 949px) {
+  .GeneralErrorContainer {
+    opacity: 1;
+    color: white;
+    top: 70vh;
+    right: 16vmin;
+    min-width: 50vmin;
+    max-height: 10vmin;
+  }
+  .GeneralErrorContainer span {
+    line-height: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .ErrorContainer {
+    color: white;
+    line-height: 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    max-width: 33vw;
+    max-height: 5vh;
+  }
+}
+@media screen and (max-width: 699px) {
+  .GeneralErrorContainer {
+    opacity: 1;
+    top: 70vh;
+    right: 16vmin;
+    min-width: 50vmin;
+    max-height: 10vmin;
+  }
+  .GeneralErrorContainer span {
+    line-height: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .ErrorContainer {
+    line-height: 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    max-width: 33vw;
+    max-height: 5vh;
+  }
 }

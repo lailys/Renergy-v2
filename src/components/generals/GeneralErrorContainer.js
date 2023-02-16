@@ -13,12 +13,16 @@ function GeneralErrorContainer() {
     window.location.pathname.includes("/dashboard") ||
     window.location.pathname === "/marketplace"
   ) {
-    return <></>;
+    return <> </>;
   }
   return (
-    <div className="GeneralErrorContainer">
-      <ErrorContainer err={context.error} />
-    </div>
+    context.error && (
+      <div className="GeneralErrorContainer">
+        <span> OOOOOPS: </span> <br />
+        <br />
+        <ErrorContainer err={context.error} />{" "}
+      </div>
+    )
   );
 }
 

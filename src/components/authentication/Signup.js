@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 function Signup() {
   return (
     <div className="col-md-4">
-      <label className="Auth-form-title">Signup</label>
       <form
         id="signupform"
         // onSubmit={loginSubmit}
       >
         <div className="form-group">
-          <label>Username</label>
           <input
             type="username"
             className="form-control"
@@ -17,14 +15,12 @@ function Signup() {
             name="UsernameInput"
             aria-describedby="usernameHelp"
             placeholder="Username"
-            // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="emailHelp" className="text-danger form-text">
             {/* {emailError} */}
           </small>
         </div>
         <div className="form-group">
-          <label>First Name</label>
           <input
             type="firstName"
             className="form-control"
@@ -32,14 +28,12 @@ function Signup() {
             name="FirstNameInput"
             aria-describedby="firstNameHelp"
             placeholder="First Name"
-            // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="emailHelp" className="text-danger form-text">
             {/* {emailError} */}
           </small>
         </div>
         <div className="form-group">
-          <label>Last Name</label>
           <input
             type="lastName"
             className="form-control"
@@ -47,14 +41,12 @@ function Signup() {
             name="LastNameInput"
             aria-describedby="lastNameIHelp"
             placeholder="Last Name"
-            // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="emailHelp" className="text-danger form-text">
             {/* {emailError} */}
           </small>
         </div>
         <div className="form-group">
-          <label>Email</label>
           <input
             type="email"
             className="form-control"
@@ -62,20 +54,17 @@ function Signup() {
             name="EmailInput"
             aria-describedby="emailHelp"
             placeholder="Email"
-            // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="emailHelp" className="text-danger form-text">
             {/* {emailError} */}
           </small>
         </div>
         <div className="form-group">
-          <label>Password</label>
           <input
             type="password"
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
-            // onChange={(event) => setPassword(event.target.value)}
           />
           <small id="passworderror" className="text-danger">
             {/* {passwordError} */}

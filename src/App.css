@@ -3,19 +3,21 @@
   --color-white-85: #ffffffcc;
   --color-white-36: #ffffff71;
   --color-white-27: #ffffff1a;
+  --color-black: #000000d0;
   --color-darkBlue: #0013e0;
   --color-blueThree: #02abf3;
-  --color-darkBlueTwo: #004bb4;
+  --color-darkBlueTwo: #0069fd;
   --color-darkBlueTwo-fade: #2955a2d6;
   --color-blue: #04aafd;
-  --color-blue-fade: #04aafdd0;
+  --color-blue-fade: #04aafde9;
   --color-blue-fade-2: #07b2fbc9;
-  --color-green: #02ff52;
-  --color-green-fade: #02ff52d6;
+  --color-green: #00ff40;
+  --color-green-fade: #00ff6aeb;
+  /* --color-green-fade: #5ec52ed0; */
   --color-green-bright: #6ffc2d;
   --color-green-bright-fade: #6ffc2d82;
   --color-purple: #910084;
-  --color-purple-fade: #910085dc;
+  --color-purple-fade: #910085f1;
   --color-red: #b92c47;
   --color-red-fade: #b92c46b8;
   --color-orange: #ff0202fd;
@@ -25,7 +27,7 @@
   --color-800: #02070e;
   --color-400: #061527c1;
   --color-300: #061527ac;
-  --color-200: #7275762c;
+  --color-200: #56585a7e;
   --color-600: #24272ce3;
   --color-700: #1d1f23ee;
   --font-exo: "Exo 2", sans-serif;
@@ -43,6 +45,8 @@
 html,
 #root,
 body {
+  background: white;
+  /* background: #02abf3; */
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -66,98 +70,18 @@ input:hover {
   box-shadow: none;
 }
 
-/* ----------- iPhone X ----------- */
-/* Portrait and Landscape */
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+@media only screen and (max-device-height: 390px) {
+  body {
+    display: none;
+  }
 }
-
-/* Portrait */
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+@media only screen and (max-device-width: 374px) and (orientation: landscape) {
+  body {
+    display: none;
+  }
 }
-
-/* Landscape */
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
-}
-/* ----------- Galaxy S6 ----------- */
-/* Portrait and Landscape */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) {
-}
-
-/* Portrait */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: portrait) {
-}
-
-/* Landscape */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {
-}
-/* ----------- Google Pixel XL ----------- */
-/* Portrait and Landscape */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) {
-}
-
-/* Portrait */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: portrait) {
-}
-
-/* Landscape */
-@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 4) and (orientation: landscape) {
-}
-/* ----------- iPad 1, 2, Mini and Air ----------- */
-/* Portrait and Landscape */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-}
-
-/* Portrait */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-}
-
-/* Landscape */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-}
-
-/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
-/* Portrait and Landscape */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Portrait */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Landscape */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* ----------- iPad Pro 10.5" ----------- */
-/* Portrait and Landscape */
-@media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Portrait */
-/* Declare the same value for min- and max-width to avoid colliding with desktops */
-/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
-@media only screen and (min-device-width: 834px) and (max-device-width: 834px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Landscape */
-/* Declare the same value for min- and max-width to avoid colliding with desktops */
-/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
-@media only screen and (min-device-width: 1112px) and (max-device-width: 1112px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* ----------- iPad Pro 12.9" ----------- */
-/* Portrait and Landscape */
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Portrait */
-/* Declare the same value for min- and max-width to avoid colliding with desktops */
-/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
-@media only screen and (min-device-width: 1024px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
-}
-
-/* Landscape */
-/* Declare the same value for min- and max-width to avoid colliding with desktops */
-/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
-@media only screen and (min-device-width: 1366px) and (max-device-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+@media (min-aspect-ratio: 5/2) {
+  body {
+    display: none;
+  }
 }

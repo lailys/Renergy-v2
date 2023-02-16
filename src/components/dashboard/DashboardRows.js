@@ -31,7 +31,7 @@ function DashboardRows({ activePage, context }) {
             : context.cancelOrder(e, order.id)
         }
       >
-        {value === "DRAFT" ? "DRAFTED" : "CANCEL"}
+        {value === "DRAFT" ? "DRAFTED" : "CANCEL"}{" "}
       </div>
     ) : (
       value
@@ -43,6 +43,7 @@ function DashboardRows({ activePage, context }) {
     .slice(start, start + 7)
     .map((order) => (
       <tr key={nextKey()}>
+        {" "}
         {dashboardTabMap[context.dashboardFolder].map((title) => (
           <td
             className={
@@ -63,9 +64,9 @@ function DashboardRows({ activePage, context }) {
                 id={order.status === "M"}
                 orderId={order.id}
               />
-            )}
+            )}{" "}
           </td>
-        ))}
+        ))}{" "}
       </tr>
     ));
 }

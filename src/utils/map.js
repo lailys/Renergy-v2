@@ -5,6 +5,8 @@ export const pageMap = {
   "/signin": ["authentication-in-btn", 145],
   "/signup": ["authentication-up-btn", 235],
   "/register": ["registration-btn", 325],
+  "/dashboard": ["dashboard"],
+  "/marketplace": ["marketplace"],
   "/stripe-payment": ["stripe-payment-page-add"],
   "/stripe-payout": ["stripe-payment-page-withdraw"],
   "/payment-success/": ["stripe-payment-success-page"]

@@ -1,5 +1,4 @@
 .Home-wrapper {
-  border: solid blue 1px;
   padding: 0;
   margin: 0;
   display: flex;
@@ -19,7 +18,7 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   min-height: 1025px;
@@ -33,7 +32,7 @@
   align-items: center;
   position: fixed;
   top: 28vmin;
-  left: 6.5vw;
+  left: 12.5vw;
   overflow: hidden;
   width: 11.2vmin;
   height: 15.5vmin;
@@ -41,13 +40,13 @@
 .Dot {
   background: var(--color-green);
   border-radius: 10%;
-  width: 0.5vmin;
-  height: 0.5vmin;
+  width: 0.6vmin;
+  height: 0.6vmin;
 }
 .FirstSectionText {
   position: fixed;
-  top: 36.4vmin;
-  left: calc(6.5vw + 9vmin);
+  top: 36.2vmin;
+  left: calc(12.6vw + 9vmin);
   width: 50vmin;
   height: 50vmin;
 }
@@ -55,7 +54,7 @@
   color: var(--color-green);
   font-family: var(--font-exo);
   font-weight: 800;
-  font-size: 7.5vmin;
+  font-size: 7.8vmin;
   line-height: 7vmin;
   text-align: left;
   width: 100%;
@@ -108,35 +107,43 @@
   bottom: -2vmin;
   right: 0;
 }
-@media screen and (min-width: 820px) and (max-width: 1350px) {
+@media screen and (min-width: 950px) and (max-width: 1350px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 26vmin;
+    left: 10.5vw;
+    overflow: hidden;
+    height: 14vmin;
+  }
   .Dot {
     width: 0.5vmin;
     height: 0.5vmin;
   }
+
   .FirstSectionText {
+    left: calc(10.5vw + 9vmin);
+    top: 32.6vmin;
     width: 36vmin;
-    height: 60vmin;
+    height: 58vmin;
   }
   .FirstSectionText-left {
     font-size: 8vmin;
   }
   .FirstSectionText-left span {
-    color: white;
-    font-family: var(--font-exo);
-    font-weight: 800;
     font-size: 4.5vmin;
     line-height: 7vmin;
     text-align: left;
     min-width: 90%;
     height: 50%;
   }
+  .FirstSectionTextBtn {
+    right: 18vmin;
+  }
 }
-
-@media screen and (max-width: 819px) {
+@media screen and (min-width: 700px) and (max-width: 949px) {
   .HomeFirstSectionDotsWrapper {
-    top: 42.8vmax;
-    left: 31.5vw;
-    width: 11.2vmin;
+    top: 30vmax;
+    left: 25vw;
+    width: 18vmin;
     height: 28vmin;
   }
   .Dot {
@@ -144,14 +151,10 @@
     height: 0.9vmin;
   }
   .FirstSectionText {
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    align-items: right;
-    top: 42.8vmax;
+    top: 30vmax;
     left: 25vw;
     width: 50vw;
-    height: 55vmin;
+    height: 62vmin;
   }
   .FirstSectionText-left {
     margin-left: 18vmin;
@@ -164,17 +167,59 @@
     text-align: left;
   }
   .text-description {
-    line-height: 3vmin;
+    line-height: 3vmax;
     font-weight: 400;
-    font-size: 1.8vmin;
+    font-size: 1.8vmax;
     text-align: center;
-    width: 96%;
+    width: 100%;
   }
   .FirstSectionTextBtn {
     padding: 1.4vmin 5vmin;
     font-weight: 800;
     font-size: 1.9vmin;
-    bottom: -3vmin;
+    bottom: -8vmin;
+    right: 16vmin;
+  }
+}
+@media screen and (max-width: 699px) {
+  .HomeFirstSectionDotsWrapper {
+    top: 43vmax;
+    left: 25vw;
+    width: 18vmin;
+    height: 28vmin;
+  }
+  .Dot {
+    width: 0.9vmin;
+    height: 0.9vmin;
+  }
+  .FirstSectionText {
+    top: 43vmax;
+    left: 26vw;
+    width: 50vw;
+    height: 60vmin;
+  }
+  .FirstSectionText-left {
+    margin-left: 18vmin;
+    font-size: 7.5vmin;
+    width: calc(100% - 18vmin);
+  }
+  .FirstSectionText-left span {
+    line-height: 10vmin;
+    font-size: 4vmin;
+    text-align: left;
+  }
+  .text-description {
+    line-height: 3vmin;
+    font-weight: 400;
+    font-size: 2.2vmin;
+    text-align: center;
+    width: 100%;
+  }
+  .FirstSectionTextBtn {
+    padding: 1.4vmin 5vmin;
+    font-weight: 800;
+    font-size: 1.9vmin;
+    bottom: -8vmin;
     right: 16vmin;
   }
 }

@@ -10,8 +10,8 @@ function NavMenuShrinked() {
   }
   useEffect(() => {}, [context.openMenu]);
   return (
-    <div className="NavMenuShrinked shrinked">
-      <MenuIcon openMenu={context.openMenu} />
+    <div className="NavMenuShrinked shrinked" onClick={context.clickCatcher}>
+      <MenuIcon openMenu={context.openMenu} />{" "}
       <div
         className="NavMenuBottom shrinked"
         id={context.openMenu ? "NavMenuBottom-opened" : ""}
@@ -21,28 +21,28 @@ function NavMenuShrinked() {
           id="shrinked-registration-btn"
           to="/register"
         >
-          JOIN US
-        </Link>
+          JOIN US{" "}
+        </Link>{" "}
         <Link
           className="NavLinkShrinked shrinked shrinkedBtn"
           id="shrinked-authentication-in-btn"
           to="/signin"
         >
-          LOGIN
-        </Link>
+          LOGIN{" "}
+        </Link>{" "}
         <div
           className="NavLinkShrinked shrinked shrinkedBtn"
           onClick={context.navigateToMarketplace}
         >
-          Marketplace
-        </div>
+          Marketplace{" "}
+        </div>{" "}
         <div
           className="NavLinkShrinked shrinked shrinkedBtn"
           onClick={context.navigateToDashboard}
         >
-          Dashboard
-        </div>
-      </div>
+          Dashboard{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 }

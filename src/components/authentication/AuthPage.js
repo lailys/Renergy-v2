@@ -25,6 +25,11 @@ function AuthPage({ mode }) {
 
   return (
     <div className="Auth-wrapper" onClick={context.PageNavigation}>
+      {mode !== "/register" && (
+        <label className="Auth-form-title">
+          {mode === "/signup" ? "SIGN UP" : "LOGIN"}
+        </label>
+      )}
       <div
         className="container"
         id={mode === "/register" ? "register-form-container" : ""}

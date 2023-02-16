@@ -4,8 +4,6 @@ function Register() {
   return (
     <>
       <div className="col-md-4">
-        {" "}
-        {/* <label className="Auth-form-title">Register</label> */}
         <div className="form-group">
           <div className="custom-control custom-checkbox">
             <div className="custom-checkbox-group">
@@ -31,14 +29,13 @@ function Register() {
           </div>
         </div>
         <div className="form-group">
-          <label>Company Name</label>
           <input
             type="companyname"
             className="form-control"
             id="CompanynameInput"
             name="CompanynameInput"
             aria-describedby="companynameHelp"
-            placeholder="Companyname"
+            placeholder="Company Name"
             // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="companynameHelp" className="text-danger form-text">
@@ -48,7 +45,6 @@ function Register() {
       </div>
       <div className="col-md-5">
         <div className="form-group">
-          <label>First Name</label>
           <input
             type="firstName"
             className="form-control"
@@ -63,7 +59,6 @@ function Register() {
           </small>
         </div>
         <div className="form-group">
-          <label>Phone</label>
           <input
             type="phone"
             className="form-control"
@@ -84,7 +79,6 @@ function Register() {
           // onSubmit={loginSubmit}
         > */}
         <div className="form-group">
-          <label>Last Name</label>
           <input
             type="lastName"
             className="form-control"
@@ -99,7 +93,6 @@ function Register() {
           </small>
         </div>
         <div className="form-group">
-          <label>Email</label>
           <input
             type="email"
             className="form-control"
@@ -118,7 +111,6 @@ function Register() {
 
       <div className="col-md-4">
         <div className="form-group">
-          <label>Address</label>
           <input
             type="address"
             className="form-control"
@@ -133,7 +125,6 @@ function Register() {
           </small>
         </div>
         <div className="form-group">
-          <label>Address2</label>
           <input
             type="address2"
             className="form-control"
@@ -150,7 +141,6 @@ function Register() {
       </div>
       <div className="col-md-3">
         <div className="form-group">
-          <label>City</label>
           <input
             type="city"
             className="form-control"
@@ -165,14 +155,13 @@ function Register() {
           </small>
         </div>
         <div className="form-group">
-          <label>Country</label>
           <input
-            type="phone"
+            type="country"
             className="form-control"
-            id="PhoneInput"
-            name="PhoneInput"
-            aria-describedby="phonelHelp"
-            placeholder="Phone"
+            id="countryInput"
+            name="countryInput"
+            aria-describedby="countryHelp"
+            placeholder="Country"
             // onChange={(event) => setEmail(event.target.value)}
           />
           <small id="phoneHelp" className="text-danger form-text">
@@ -182,7 +171,6 @@ function Register() {
       </div>
       <div className="col-md-3">
         <div className="form-group">
-          <label>State</label>
           <input
             type="firstName"
             className="form-control"
@@ -199,7 +187,6 @@ function Register() {
       </div>
       <div className="col-md-3">
         <div className="form-group">
-          <label>Zip Code</label>
           <input
             type="zipCode"
             className="form-control"
@@ -216,7 +203,6 @@ function Register() {
       </div>
       <div className="col-md-4">
         <div className="form-group">
-          <label>Wallet</label>
           <input
             type="wallet"
             className="form-control"
@@ -235,7 +221,7 @@ function Register() {
           className="btn btn-lg in-btn"
           id="form-submit-btn"
         >
-          Sign in
+          REGISTER
         </button>
       </div>
     </>

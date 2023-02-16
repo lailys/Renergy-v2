@@ -8,13 +8,16 @@ function NavMenu() {
     console.log("Context dose not exists");
   }
   useEffect(() => {}, [context.userLogedin]);
+
   return (
     <div className="NavMenu">
       <div className="NavMenuLeft">
         <div
           className="NavLink link"
           id={
-            window.location.pathname === "/marketplace" ? "marketplace-btn" : ""
+            window.location.pathname.includes("/marketplace")
+              ? "marketplace-btn"
+              : ""
           }
           onClick={context.navigateToMarketplace}
         >
@@ -22,7 +25,11 @@ function NavMenu() {
         </div>
         <div
           className="NavLink link"
-          id={window.location.pathname === "/dashboard" ? "dashboard-btn" : ""}
+          id={
+            window.location.pathname.includes("/dashboard")
+              ? "dashboard-btn"
+              : ""
+          }
           onClick={context.navigateToDashboard}
         >
           Dashboard
@@ -30,13 +37,15 @@ function NavMenu() {
       </div>
       <div className="NavMenuRight">
         {context.userLogedin ? (
-          <div
-            className="NavLink link"
-            id="authentication-in-btn"
-            onClick={context.logout}
-          >
-            LOGOUT
-          </div>
+          <>
+            <div
+              className="NavLink link"
+              id="authentication-in-btn"
+              onClick={context.logout}
+            >
+              LOGOUT
+            </div>
+          </>
         ) : (
           <Link
             className="NavLink link"
@@ -46,9 +55,11 @@ function NavMenu() {
             LOGIN
           </Link>
         )}
-        <Link className="NavLink link" id="registration-btn" to="/register">
-          JOIN US
-        </Link>
+        {!context.isRegistered && context.userLogedin && (
+          <Link className="NavLink link" id="registration-btn" to="/register">
+            JOIN US
+          </Link>
+        )}
       </div>
     </div>
   );

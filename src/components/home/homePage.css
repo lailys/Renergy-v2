@@ -95,8 +95,9 @@
 }
 .FirstSectionTextBtn {
   padding: 0.5vmin 3vmax;
-  background: var(--color-blue);
-  color: white;
+  background: white;
+  /* background: var(--color-blue); */
+  color: var(--color-blue);
   font-family: var(--font-roboto);
   font-weight: 600;
   font-size: 1.6vmin;

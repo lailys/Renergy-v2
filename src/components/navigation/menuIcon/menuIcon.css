@@ -1,42 +1,22 @@
 .MenuIcon-wrapper {
   /* border: solid blue 1px; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  transition: all 0.1s ease-out;
-  height: 2vw;
-  width: 0.7vw;
-}
-#MenuIcon-wrapper-opened {
-  transform: rotate(-90deg);
+  position: relative;
+  height: 1.8vmin;
+  width: 1.8vmin;
 }
 .dot-icon {
-  margin: 0;
-  background: white;
+  background: var(--color-blue);
   border-radius: 10%;
-  width: 0.35vw;
-  height: 0.35vw;
+  transition: all 0.2s ease-out;
+  position: absolute;
+  top: 0vmin;
+  left: 0vmin;
+  height: 1.8vmin;
+  width: 1.8vmin;
 }
 
-@media screen and (min-width: 950px) and (max-width: 1350px) {
-  .MenuIcon-wrapper {
-    /* border: solid red 1px; */
-    height: 3vw;
-  }
-  .dot-icon {
-    width: 0.55vw;
-    height: 0.55vw;
-  }
-}
-@media screen and (max-width: 949px) {
-  .MenuIcon-wrapper {
-    /* border: solid red 1px; */
-    height: 4vw;
-  }
-  .dot-icon {
-    background: var(--color-blue);
-    width: 0.7vw;
-    height: 0.7vw;
-  }
+#dot-icon-opened {
+  border-radius: 42% 58% 40% 60% / 59% 67% 33% 41%;
+  height: 2.8vmin;
+  width: 2.8vmin;
 }

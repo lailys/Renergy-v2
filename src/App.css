@@ -8,16 +8,19 @@
   --color-blueThree: #02abf3;
   --color-darkBlueTwo: #0069fd;
   --color-darkBlueTwo-fade: #2955a2d6;
-  --color-blue: #04aafd;
-  --color-blue-fade: #04aafde9;
+  --color-pink: #ff00c1;
+  --color-pink-fade: #ff00bfd9;
+  /* --color-blue: #ff00c1; */
+  --color-blue: #21adfe;
+  --color-blue-fade: #1daafcd9;
   --color-blue-fade-2: #07b2fbc9;
-  --color-green: #00ff40;
-  --color-green-fade: #00ff6aeb;
+  --color-green: #8fc93a;
+  --color-green-fade: #8fc93a;
   /* --color-green-fade: #5ec52ed0; */
-  --color-green-bright: #6ffc2d;
-  --color-green-bright-fade: #6ffc2d82;
-  --color-purple: #910084;
-  --color-purple-fade: #910085f1;
+  --color-green-bright: #4fcc5c;
+  --color-green-bright-fade: #4fcc5c;
+  --color-purple: #7d11dc;
+  --color-purple-fade: #781dc7;
   --color-red: #b92c47;
   --color-red-fade: #b92c46b8;
   --color-orange: #ff0202fd;
@@ -31,7 +34,7 @@
   --color-600: #24272ce3;
   --color-700: #1d1f23ee;
   --font-exo: "Exo 2", sans-serif;
-  --font-roboto: "Roboto", arial, sans-serif;
+  --font-roboto: "Roboto", sans-serif;
   --font-ubuntu: "Ubuntu", sans-serif;
   --radius-button: 6px;
   --radius-form: 6px;

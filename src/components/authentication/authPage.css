@@ -99,6 +99,9 @@ label {
 .up-btn {
   background: var(--color-red);
 }
+.reg-btn {
+  background: var(--color-blue);
+}
 #form-submit-btn:hover {
   opacity: 0.8;
   background: var(--color-purple);

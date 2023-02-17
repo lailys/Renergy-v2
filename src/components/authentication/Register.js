@@ -218,7 +218,7 @@ function Register() {
         </div>
         <button
           type="submit"
-          className="btn btn-lg in-btn"
+          className="btn btn-lg reg-btn"
           id="form-submit-btn"
         >
           REGISTER

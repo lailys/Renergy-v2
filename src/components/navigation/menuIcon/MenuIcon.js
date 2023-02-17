@@ -2,13 +2,11 @@ import "./menuIcon.css";
 
 function MenuIcon({ openMenu }) {
   return (
-    <div
-      className="MenuIcon-wrapper navIcon"
-      id={openMenu ? "MenuIcon-wrapper-opened" : ""}
-    >
-      <div className="dot-icon navIcon" />
-      <div className="dot-icon navIcon" />
-      <div className="dot-icon navIcon" />
+    <div className="MenuIcon-wrapper navIcon">
+      <div
+        className="dot-icon navIcon"
+        id={openMenu ? "dot-icon-opened" : ""}
+      />{" "}
     </div>
   );
 }

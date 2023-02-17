@@ -71,6 +71,7 @@ export const TbdContextComp = ({ children }) => {
 
   useEffect(() => {
     function handleResize() {
+      setOpenMenu(false);
       setWindowDimensions(getWindowDimensions());
     }
 
@@ -422,7 +423,6 @@ export const TbdContextComp = ({ children }) => {
     }
   };
   const clickCatcher = (e) => {
-    console.log(e.target, ">>>>>>>>>>>>>>>>>>>>>.");
     if (e.target.classList.contains("navIcon")) {
       setOpenMenu((prev) => !prev);
     }

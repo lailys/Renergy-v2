@@ -41,7 +41,7 @@
   background: var(--color-green-fade);
 }
 .registration-btn {
-  background: var(--color-blue-fade);
+  background: var(--color-green);
 }
 .marketplace-drop {
   background: var(--color-red-fade);
@@ -76,10 +76,10 @@
   }
   .registration-btn,
   .home-btn {
-    left: 2vw;
-    top: 15vh;
-    width: 95vw;
-    height: 85vh;
+    left: 10vw;
+    top: 19vh;
+    width: 80vw;
+    height: 75vh;
   }
   .authentication-in-btn {
     left: 15vw;

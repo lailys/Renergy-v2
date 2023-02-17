@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 12vh;
+  height: 14vh;
 }
 .HomeLink {
   padding: 0;
@@ -32,8 +32,8 @@
   margin: 0 0.4vw;
   color: var(--color-blue);
   font-family: var(--font-roboto);
-  font-weight: 300;
-  font-size: 0.95vw;
+  font-weight: 400;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +99,7 @@
   color: white;
   background: var(--color-blue);
   font-weight: 600;
-  font-size: 0.8vw;
+  font-size: 1rem;
   margin-left: 0.5vw;
 }
 #registration-btn:hover {
@@ -109,7 +109,7 @@
   background: white;
   color: var(--color-blue);
   border: solid 0.1px white;
-  font-size: 0.8vw;
+  font-size: 1rem;
   font-weight: 600;
 }
 #authentication-in-btn:hover {
@@ -125,96 +125,76 @@
   width: 3.5vw;
 }
 .NavMenuBottom {
+  opacity: 0;
   z-index: -1;
   padding: 0;
-  background: var(--color-blue);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
   position: absolute;
-  top: 0vh;
-  right: -3vw;
-  transition: height 0.2s ease-out;
+  top: 10vh;
+  right: -4.5vw;
+  transition: all 0.3s ease-out;
   overflow: hidden;
-  width: 100vw;
-  height: 0;
+  width: 12vw;
 }
 #NavMenuBottom-opened {
-  /* height: 35vh; */
+  opacity: 1;
 }
 .NavLinkShrinked {
-  border-top: solid var(--color-purple) 0.1px;
-  border-bottom: solid var(--color-purple) 0.1px;
-  padding: 0;
-  margin: 0;
-  color: white;
+  border-radius: 42% 58% 40% 60% / 59% 67% 33% 41%;
+  padding: 1vmin;
+  margin: 2vmin 0 0 0;
   font-family: var(--font-roboto);
-  font-weight: 400;
-  font-size: 1.15vw;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  height: 5vh;
-  width: 100%;
+  width: 11vmin;
+  height: 11vmin;
 }
-.NavLinkShrinked:active {
-  background: var(--active-btn-two);
+.shrinked {
+  background: var(--color-blue-fade);
   color: white;
+  font-weight: 400;
+  font-size: 0.7rem;
 }
-.NavLinkShrinked:hover {
+.shrinked-authentication-in-btn {
   background: var(--color-blue);
   color: white;
+  font-weight: 900;
+  font-size: 0.8rem;
 }
-#shrinked-registration-btn {
-  padding: 0;
-  margin: 0;
-  color: var(--color-grey);
-  background: var(--color-blue);
-  font-weight: 700;
-  font-size: 1.2vw;
+.shrinked-registration-btn {
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: var(--color-blue);
+  background: white;
 }
-#shrinked-registration-btn:hover {
-  background: var(--color-blue);
+.shrinked-authentication-in-btn:hover {
+  color: white;
+  font-size: 0.9rem;
+}
+.shrinked-registration-btn:hover {
+  color: var(--color-blue);
+  font-size: 0.9rem;
+}
+.shrinked:hover {
   opacity: 0.9;
-}
-#shrinked-authentication-in-btn {
   color: white;
-  font-size: 1.2vw;
-  font-weight: 700;
+  font-weight: 500;
 }
-#shrinked-authentication-in-btn:hover {
-  background: var(--color-blue);
-}
-@media screen and (min-width: 950px) and (max-width: 1380px) {
+@media screen and (min-width: 950px) and (max-width: 1350px) {
   .LogoImg {
-    width: 3.2vw;
+    width: 4vw;
   }
   .LogoName {
-    font-size: 1.8vw;
+    font-size: 2.6vw;
   }
 }
 @media screen and (max-width: 949px) {
-  .LogoImg {
-    width: 5.5vw;
-  }
-  .LogoName {
-    color: var(--color-blue);
-    font-size: 1.5rem;
-  }
-  .NavMenu {
-    display: none;
-  }
-  .NavMenuShrinked {
-    display: flex;
-  }
-}
-
-/* ----------- iPhone 13 and 13 Pro ----------- */
-/* Portrait */
-@media only screen and (min-device-width: 375px) and (max-device-width: 390px) and (orientation: portrait) {
   .NavMenu {
     display: none;
   }
@@ -222,14 +202,13 @@
     display: flex;
   }
   .LogoImg {
-    width: 4.4vw;
+    width: 5vw;
   }
   .LogoName {
+    font-size: 2.8vw;
     color: var(--color-blue);
-    font-size: 1.2rem;
   }
-}
-/* Landscape */
-@media only screen and (min-device-width: 844px) and (max-device-width: 926px) and (orientation: landscape) {
-  /* Styles for landscape mode on iPhone 13 and 13 Pro go here */
+  .navbar-wrapper {
+    padding: 0 6vw;
+  }
 }

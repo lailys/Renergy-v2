@@ -1,6 +1,5 @@
 .Table-wrapper {
   z-index: 1;
-  /* border: solid red 1px; */
   padding: 1rem 1rem;
   background: white;
   font-family: var(--font-roboto);

@@ -50,20 +50,21 @@
   background: none;
   color: white;
   border: 0;
+  font-size: 0.9rem;
+  position: relative;
   height: 8vh;
   width: 10vw;
 }
 .MarketPlaceFilter-item {
-  margin: 0 1px;
+  margin: 0 0.2vw;
   border-bottom: solid white 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 11.5vw;
+  width: 11.2vw;
   height: 8vh;
 }
 .MarketPlaceFilter-item-date {
-  /* border: solid blue 1px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +73,6 @@
   height: 8vh;
 }
 .MarketPlaceFilter-item-quantity {
-  /* border: solid blue 1px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,18 +84,24 @@
 }
 
 .dropdown-menu {
+  padding: 0;
   color: white;
-  background: var(--color-purple);
+  /* background: var(--color-purple); */
   border-radius: 0 0 4px 4px;
-  border: solid white 1px;
+  /* border: solid yellow 1px; */
   overflow: hidden;
+  transform: translate3d(-10%, 102px, 0px);
+
   max-height: 40vh;
-  width: 100%;
 }
 .dropdown-item-text,
 .dropdown-item {
+  padding: 0.5vmin 0;
+  background: var(--color-purple);
   color: white;
   text-align: center;
+  border-radius: 0;
+  width: 11.2vw;
 }
 #MarketPlaceFilter-item-quantity-cntrol {
   width: 80%;

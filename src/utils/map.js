@@ -116,8 +116,8 @@ export const marketPlaceReverseMap = {
 };
 export const marketplaceFiltermap = [
   ["generator_types", "Generator Type", "generator"],
-  ["certifying_bodies", "Certifying Body", "certifying"],
   ["states", "States", "states"],
+  ["certifying_bodies", "Certifying Body", "certifying"],
   ["qty", "Quantity", "quantity"],
   ["side", "Order Side", "side"],
 ]
